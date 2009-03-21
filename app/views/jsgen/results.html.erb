@@ -1,0 +1,6 @@
+var names = document.getElementsByName('authenticity_token');
+var auth = names[0].value;
+// <%= params[:ref] %>
+<% for t in @takens %>
+new Ajax.InPlaceEditor('score_<%= t.ref %>', '/quiz/change_score/<%= t.ref %>?authenticity_token=' + auth, {cols:3, onComplete:function(){document.location.href='?attr=<%= params[:attr] %>&order=<%= params[:order] %>';}, cancelControl:'false', highlightcolor:'#C9E2FB', submitOnBlur:'true'});
+<% end %>

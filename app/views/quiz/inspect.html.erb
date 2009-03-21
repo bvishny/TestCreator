@@ -1,0 +1,52 @@
+<% if @item.type2 == 3 %>
+  URL: <span id="url_<%= @item.ref %>"><%= h @item.url %></span><br><br>
+  Size:<br>
+  <div id="track1" style="margin: 4px 0pt 0pt -4px; width: 200px; background-image: url(/images/slider/slidertrack.gif); background-repeat: repeat-x; background-position: left center; height: 18px;">
+  <div id="handle1" style="width: 18px; height: 18px;">
+    <img src="/images/slider/scaler_slider.gif"/>
+  </div>
+</div> 
+  <script type="text/javascript">width_of_object = <%= @item.c3.to_i * 2 %>; height_of_object = <%= @item.c4.to_i * 2 %></script>
+  <script type="text/javascript">
+    ref = '<%= @item.ref %>';
+    new Ajax.InPlaceEditor('url_<%= @item.ref %>', '/quiz/edit_url/<%= @item.ref %>?authenticity_token=' + auth + '&quiz_ref=<%= @item.quiz.ref %>', {ajaxOptions:{onComplete:function(){ReloadItem('<%= @item.id %>');OriginalWidth('<%= @item.ref %>', Element.getWidth('img<%= @item.id %>'));OriginalHeight('<%= @item.ref %>', Element.getHeight('img<%= @item.id %>'));}}, rows:2, cols:25, cancelControl:'false', highlightcolor:'#C9E2FB', submitOnBlur:'true'});
+    var demoSlider = new Control.Slider('handle1','track1',{axis:'horizontal', minimum: 0, maximum:200, alignX: 2, increment: 2, sliderValue: Element.getHeight('img<%= @item.id %>') / <%= @item.c4.to_i * 2 %>});
+
+    demoSlider.options.onSlide = function(value){
+      scaleIt(value, '<%= @item.id %>');
+    }
+
+    demoSlider.options.onChange = function(value){
+     scaleIt(value, '<%= @item.id %>');
+    }
+    sendWidthAndHeight('<%= @item.id %>');
+  </script><br>
+<% elsif @item.type2 == 4 %>
+  <strong>Points:</strong> <span id="points_<%= @item.ref %>"><%= @item.points %></span><br><br>
+  <strong>Explanation:</strong><br> <span id="explanation_<%= @item.ref %>"><%= @item.explanation %><% if @item.explanation == "" %>No explanation provided. Add one?<% end %></span><br><br>
+  <script type="text/javascript">
+     new Ajax.InPlaceEditor('points_<%= @item.ref %>', '/quiz/edit_points/<%= @item.ref %>?authenticity_token=' + auth + '&quiz_ref=<%= @item.quiz.ref %>', {size:3, cancelControl:'false', highlightcolor:'#C9E2FB', submitOnBlur:'true'});
+     new Ajax.InPlaceEditor('explanation_<%= @item.ref %>', '/quiz/edit_explanation/<%= @item.ref %>?authenticity_token=' + auth + '&quiz_ref=<%= @item.quiz.ref %>', {rows:2, cols:25, cancelControl:'false', highlightcolor:'#C9E2FB', submitOnBlur:'true'});
+  </script>
+<% elsif @item.type2 == 5 %>
+   <strong>Points:</strong> <span id="points_<%= @item.ref %>"><%= @item.points %></span><br><br>
+   <strong>Explanation:</strong><br> <span id="explanation_<%= @item.ref %>"><%= @item.explanation %><% if @item.explanation == "" %>No explanation provided. Add one?<% end %></span><br>
+    <script type="text/javascript">
+     new Ajax.InPlaceEditor('points_<%= @item.ref %>', '/quiz/edit_points/<%= @item.ref %>?authenticity_token=' + auth + '&quiz_ref=<%= @item.quiz.ref %>', {size:3, cancelControl:'false', highlightcolor:'#C9E2FB', submitOnBlur:'true'});
+    new Ajax.InPlaceEditor('explanation_<%= @item.ref %>', '/quiz/edit_explanation/<%= @item.ref %>?authenticity_token=' + auth + '&quiz_ref=<%= @item.quiz.ref %>', {rows:2, cols:25, cancelControl:'false', highlightcolor:'#C9E2FB', submitOnBlur:'true'});
+  </script>
+  <% if @item.answer == "" or @item.answer == "answer" %>
+    <br><em>Please type an answer for more options</em>
+  <% else %>
+        <p>
+          <% if @number %><em>This is a math-based problem. How much % error is allowed?</em><% else %><em>The user's answer may be misspelled. How many misplaced letters are allowed?</em><% end %><br>
+          <span id="c2_<%= @item.ref %>"><%= h @item.c2 %><% if @item.c2 == "" %>0<% if @number %>.0<% end %><% end %></span><% if @number %>%<% end %>
+        </p>
+        <script type="text/javascript">
+          MCInPlaceSize('<%= @item.ref %>', '2', 3);
+        </script>
+  <% end %>
+<% end %>
+<form action="/quiz/delete_item/<%= @item.ref %>" method="post" onsubmit="new Ajax.Updater('inspector_ajax', '/quiz/delete_item/<%= @item.ref %>', {asynchronous:true, evalScripts:true, parameters:Form.serialize(this)}); return false"> <%= token_tag %>
+  <button type="submit"><img src="/images/icons/delete.png"/> Delete Item</button>
+</form>

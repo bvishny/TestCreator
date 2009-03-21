@@ -1,0 +1,75 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head>
+    <title>WebQuiz: <%= h @quiz.name %></title>
+    <link rel="stylesheet" type="text/css" href="/stylesheets/base.css?<%= rand(10000) %>"/>
+    <script type="text/javascript" src="http://208.112.81.88/javascripts/prototype-min.js"></script>
+    <script type="text/javascript" src="/javascripts/quiz.js?<%= rand(10000) %>"></script>
+  </head>
+  <body>
+    <div id="container">
+      <div id="top">
+        <h1 id="titleh1"><%= h @quiz.name %></h1>
+        <% if @quiz.total == 0 -%>
+            <% total = Item.sum('points', :conditions => ["quiz_id = ?", @quiz.id ]) -%>
+          <% else -%>
+            <% total = @quiz.total -%>
+          <% end -%>
+        <h3><%= h @taken.user.name %> scored <%= @taken.score.to_f -%> / <%= total -%></h3>
+        <div id="logo2">
+          <img src="/images/logo.gif" width="64" height="64"/>
+        </div>
+      </div>
+      <div id="menu">
+         <a href="/user/home">Home</a>
+          <a href="/user/edit">My Profile</a>
+          <a href="/user/take_quizzes">Take Quizzes</a>
+          <a href="/user/quizzes" style="color:#173A7A;">My Quizzes</a>
+          <a href="/quiz/new">New Quiz</a>
+          <a href="/user/logout">Logout</a>
+      </div>
+      <div id="content">
+<% count = 0 %>
+        <div id="quizitems">
+          <% for item in @items %>
+            <div id="item_<%= item.id %>" class="item">
+          <% if item.type2 == 1 %>
+            <h2 id="h2_<%= item.ref %>"><%= h item.text %></h2>
+        <% elsif item.type2 == 2 %>
+            <span id="txt_<%= item.ref %>"><%= h item.text %></span>
+          <% elsif item.type2 == 3 %>
+            <img style="width:<%= h item.c1 %>px;height:<%= h item.c2 %>px" id="img<%= item.id %>" src="<%= h item.url %>" width="<%= h item.c1 %>" height="<%= h item.c2 %>"/>
+          <% elsif item.type2 == 4 %>
+            <% count += 1 %>
+    <%= count %>. <span id="txt_<%= item.ref %>" style="font-weight:600"><%= h item.text %></span><br>
+     <% letters = ["A", "B", "C", "D", "E"] %>
+      <% response = @taken.answers.find(:first, :conditions => ["item_id = ?", item.id]) %>
+      <% for i in 1..5 %>
+      <% if item["c#{i}"] =~ /[a-zA-Z0-9]/ or item["c#{i}"].length > 0 %><input disabled="true" type="radio" <% unless response.blank? %><% if response.answer == letters[i-1] %>checked="checked"<% end %><% end %> name="group_<%= item.ref %>" value="<%= letters[i-1] %>"> <span id="c<%= i %>_<%= item.ref %>"><%= h item["c#{i}"] %></span> <% if item.answer == letters[i-1] %><img src="/images/tick.png"/><% else %><% if not response.blank? %><% if response.answer == letters[i-1] %><img src="/images/cross.png"/><% end %><% end %><% end %><br><% end %>
+      <% end %>
+      <% if response.blank? %><p><img src="/images/cross.png"> <%= h @taken.user.name %> did not respond to this question!</p><% end %>
+  <% elsif item.type2 == 5 %>
+     <% count += 1 %>
+      <%= count %>. <span style="font-weight:600" id="txt_<%= item.ref %>"><%= h item.text %></span><br>
+      <% response = @taken.answers.find(:first, :conditions => ["item_id = ?", item.id]) %>
+      <input type="text" disabled="true" id="exact_answer_<%= item.ref %>" <% unless response.blank? %>value="<%= response.answer %>"<% end %> name="exact_answer" /> <span id="c1_<%= item.ref %>"><%= h item.c1 %></span> <% if not response.blank? %><% if response.correct == 1 %><img src="/images/tick.png"><% else %><img src="/images/cross.png"><p><img src="/images/exclamation.png"/> <small><strong>Correct Answer:</strong> <%= item.answer %></small></p><% end %> <% else %> <img src="/images/cross.png"><% end %>
+        <% if response.blank? %><p><img src="/images/exclamation.png"> <%= h @taken.user.name %> did not respond to this question!</p><% end %>
+  <% end %>
+</div>
+          <% end %>
+          <div style="text-align:center;margin-top:10px;">
+            <form id="tokens" name="tokens" action="/quiz/results/<%= @quiz.ref %>" method="post">
+              <%= token_tag %>
+              <button type="button" onclick="history.back();"><img src="/images/cross.png"/> Exit</button>
+            </form>
+          </div>
+      </div>
+      </div>
+      <div id="bottom">
+      
+      </div>
+    </div>
+  </body>
+</html>

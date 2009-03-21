@@ -1,0 +1,99 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head>
+    <title>WebQuiz: Take Quizzes</title>
+    <link rel="stylesheet" type="text/css" href="/stylesheets/base.css?<%= rand(10000) %>"/>
+    <script type="text/javascript" src="http://208.112.81.88/javascripts/prototype-min.js"></script>
+    <script type="text/javascript" src="http://208.112.81.88/javascripts/effects-min.js"></script>
+  </head>
+  <body>
+    <div id="container">
+      <div id="top">
+        <h1>Take Quizzes</h1>
+        <h3>Quiz Time!</h3>
+        <div id="logo2">
+          <img src="/images/logo.gif" width="64" height="64"/>
+        </div>
+      </div>
+      <div id="menu">
+          <a href="/user/home">Home</a>
+          <a href="/user/edit">My Profile</a>
+          <a href="/user/take_quizzes" style="color:#173A7A;">Take Quizzes</a>
+          <a href="/user/quizzes">My Quizzes</a>
+          <a href="/quiz/new">New Quiz</a>
+          <a href="/user/logout">Logout</a>
+      </div>
+      <div id="content">
+        <h3>1. Start new quiz</h3>
+        <p>Use the search tool to find a new quiz:</p>
+        <form action="/user/search" method="post">
+          <%= token_tag %>
+          <input name="q" class="field" type="text"/> <button type="submit">Go!</button>
+        </form>
+        <br>
+        <h3>2. Quizzes in progress</h3>
+<% if @qprogress.blank? %>
+   You aren't working on any quizzes right now.<br>
+<% else %>
+    <br>
+     <table id="quiztable" cellspacing="0">
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">Last Work</th>
+      <th scope="col">Resume</th>
+      <th scope="col">End Quiz</th>
+    </tr>
+    <% for q in @qprogress %>
+     <tr id="row_<%= q.ref %>" style="background-color:<%= cycle('#E5EBF0', '#FFFFFF') %>;">
+    <td class="desc"><%= q.quiz.name %></td>
+    <td class="lineitem"><%= q.updated_at.strftime("%I:%M%p on %m/%d/%y") %></td>
+    <td class="lineitem"><a href="/quiz/resume/<%= q.ref %>">Resume</a></td>
+    <td class="lineitem"><a href="/quiz/end_quiz/<%= q.ref %>">End Quiz</a></td>
+    </tr>
+    <% end %>            
+    </table>
+<% end %>
+        <br>
+        <h3>3. Completed quizzes</h3>
+        <% if @completeds.blank? %>
+           You haven't completed any quizzes yet.
+        <% else %>
+          <% total = 0 %>
+      <% totalpts = 0 %>
+      <br>
+      <table id="quiztable" cellspacing="0">
+        <tr>
+          <th scope="col">Name</th>
+        <th scope="col">Date</th>
+                  <th scope="col">Score</th>
+        <th scope="col">%</th>
+          <th scope="col">Review</th>
+          <th scope="col">X</th>
+        </tr>
+        <% for q in @completeds %>
+         <tr id="row_<%= q.ref %>" style="background-color:<%= cycle('#E5EBF0', '#FFFFFF') %>;">
+         <% total += q.quiz.total %>
+         <% totalpts += q.score %>
+        <% if q.quiz.total == 0 %>
+            <% totalquiz = Item.sum('points', :conditions => ["quiz_id = ?", q.quiz.id ]) %>
+          <% else %>
+            <% totalquiz = q.quiz.total %>
+          <% end %>
+        <td class="desc"><%= q.quiz.name %></td>
+      <td class="lineitem"><%= q.updated_at.strftime("%m/%d/%y") %></td>
+      <td class="lineitem"><%= q.score.to_f %> / <%= totalquiz %></td>
+      <td class="lineitem"><%= ((q.score.to_f / totalquiz.to_f) * 100).round %></td>
+        <td class="lineitem"><a href="/quiz/review/<%= q.ref %>">Review</a></td>
+          <td class="lineitem"><a href="javascript:void(0)" onclick="deleteAttempt('<%= q.ref %>')">X</a></td>
+        </tr>
+        <% end %>            
+      </table>
+        <% end %>
+      </div>
+      <div id="bottom">
+       <script type="text/javascript" src="/javascripts/quizUtil.js?<%= rand(10000) %>"></script>
+      </div>
+    </div>
+  </body>
+</html>

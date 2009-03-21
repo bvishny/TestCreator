@@ -1,0 +1,12 @@
+<% unless @user.valid? %><div id="errordiv" style="border:1px solid #990000;width:400px;font-family:Helvetica">
+        <div id="errorheading" style="background-color:red;padding:3px;color:#FFFFFF;border-bottom:1px solid #620000">(!) Please correct the following errors:</div>
+        <ul style="list-style:square;">
+        <% for f in @user.errors %>
+          <li><%= f[0].capitalize %> <%= f[1].gsub("can't be", "is") %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% else %>
+      <script type="text/javascript">document.location.href='/user/home';
+      </script>
+    <% end %>

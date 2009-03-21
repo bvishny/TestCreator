@@ -1,0 +1,56 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head>
+    <title>WebQuiz: Profile</title>
+    <link rel="stylesheet" type="text/css" href="/stylesheets/base.css?<%= rand(10000) %>"/>
+    <script type="text/javascript" src="http://208.112.81.88/javascripts/prototype-min.js"></script>
+  </head>
+  <body>
+    <div id="container">
+      <div id="top">
+        <h1>Profile</h1>
+        <h3>All about my account!</h3>
+        <div id="logo2">
+          <img src="/images/logo.gif" width="64" height="64"/>
+        </div>
+      </div>
+      <div id="menu">
+          <a href="/user/home">Home</a>
+          <a href="/user/edit" style="color:#173A7A;">My Profile</a>
+          <a href="/user/take_quizzes">Take Quizzes</a>
+          <a href="/user/quizzes">My Quizzes</a>
+          <a href="/quiz/new">New Quiz</a>
+          <a href="/user/logout">Logout</a>
+      </div>
+      <div id="content">
+        <div id="update">
+        </div>
+        <form action="/user/update" method="post" onsubmit="new Ajax.Updater('update', '/user/update', {asynchronous:true, evalScripts:true, parameters:Form.serialize(this)}); return false;" name="frmRegister">
+         <%= token_tag %>
+          <p>
+            Name:<br>
+            <input name="user[name]" class="field" value="<%= @user.name %>" size="35" type="text"/>
+          </p>
+          <p>
+            Email:<br>
+          <input name="user[email]" class="field" value="<%= @user.email %>" size="35" type="text"/>
+          </p>
+          <p>
+            Password:<br>
+          <input name="user[password]" class="field" value="<%= @user.password %>" size="35" type="password"/>
+          </p>
+          <p>
+          Confirm Password:<br>
+          <input name="user[password_confirmation]" size="35" class="field" value="<%= @user.password %>" type="password"/>
+          </p>
+          <button name="btnSubmit" type="submit">Submit</button>
+          </form>
+      </div>
+      <div id="bottom">
+      
+      </div>
+    </div>
+  </body>
+</html>
+ 

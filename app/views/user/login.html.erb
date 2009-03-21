@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head>
+    <title>WebQuiz: Login</title>
+    <link rel="stylesheet" type="text/css" href="/stylesheets/base.css?<%= rand(10000) %>"/>
+    <script type="text/javascript" src="http://208.112.81.88/javascripts/prototype-min.js"></script>
+  </head>
+  <body>
+    <div id="container">
+      <div id="top">
+        <h1>Login</h1>
+        <h3>Quick & Secure!</h3>
+        <div id="logo2">
+          <img src="/images/logo.gif" width="64" height="64"/>
+        </div>
+      </div>
+      <div id="menu">
+          <a href="/">Home</a>
+          <a href="/user/login"  style="color:#173A7A;">Login</a>
+          <a href="/user/register">Register</a>
+          <a href="/quizzes">Take Quizzes</a>
+      </div>
+      <div id="content">
+        <% if flash[:notice] %><h3 style="color:red"><%= flash[:notice] %></h3><% end %>
+        <form action="/user/login" method="post" name="frmLogin">
+         <%= token_tag %>
+          <p>
+            Username:<br>
+            <input name="username" class="field" size="35" type="text"/>
+          </p>
+          <p>
+            Password:<br>
+          <input name="password" class="field" size="35" type="password"/>
+          </p>
+          <button name="btnSubmit" type="submit">Submit</button>
+          </form>
+      </div>
+      <div id="bottom">
+      
+      </div>
+    </div>
+  </body>
+</html>
+ 

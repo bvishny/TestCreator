@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head>
+    <title>WebQuiz: <%= @quiz.name %></title>
+    <link rel="stylesheet" type="text/css" href="/stylesheets/base.css?<%= rand(10000) %>"/>
+    <script type="text/javascript" src="http://208.112.81.88/javascripts/prototype-min.js"></script>
+    <script type="text/javascript" src="http://208.112.81.88/javascripts/effects-min.js"></script>
+    <script type="text/javascript" src="http://208.112.81.88/javascripts/controls.js"></script>
+  </head>
+  <body>
+    <div id="container">
+      <div id="top">
+        <h1><%= @quiz.name %></h1>
+        <h3>Participant Results</h3>
+        <div id="logo2">
+          <img src="/images/logo.gif" width="64" height="64"/>
+        </div>
+      </div>
+      <div id="menu">
+          <a href="/user/home">Home</a>
+          <a href="/user/edit">My Profile</a>
+          <a href="/user/take_quizzes">Take Quizzes</a>
+          <a href="/user/quizzes" style="color:#173A7A;">My Quizzes</a>
+          <a href="/quiz/new">New Quiz</a>
+          <a href="/user/logout">Logout</a>
+      </div>
+      <div id="content">
+        <% if @results.blank? %>
+           <img src="/images/exclamation.png"/> There are no results available for this quiz!
+        <% else %>
+      <br>
+      <form action="?" method="post" name="order"><strong style="color:#173A7A">Order By:</strong> <%= token_tag %><select name="attr" onchange="document.forms.order.submit();"><option value="0" <% if params[:attr].to_i == 0 %>selected="selected"<% end %>>Date Updated</option><option value="1" <% if params[:attr].to_i == 1 %>selected="selected"<% end %>>Score</option></select> in <select name="order" onchange="document.forms.order.submit();"><option value="0" <% if params[:order].to_i == 0 %>selected="selected"<% end %>>Ascending</option><option value="1" <% if params[:order].to_i == 1 %>selected="selected"<% end %>>Descending</option></select> order</form><br>
+      <table id="quiztable" cellspacing="0">
+        <tr>
+          <th scope="col">Participant Name</th>
+          <th scope="col">Score</th>
+          <th scope="col">%</th>
+          <th scope="col">View Quiz</th>
+        </tr>
+        <% for r in @results %>
+         <tr id="row_<%= r.ref %>" style="background-color:<%= cycle('#E5EBF0', '#FFFFFF') %>;">
+        <td class="desc"><%= h r.user.name %></td>
+          <% if @quiz.total == 0 %>
+            <% total = Item.sum('points', :conditions => ["quiz_id = ?", @quiz.id ]) %>
+          <% else %>
+            <% total = @quiz.total %>
+          <% end %>
+      <td class="lineitem"><span id="score_<%= r.ref %>"><%= r.score %></span> / <%= total %></td>
+      <td class="lineitem" id="percent_<%= r.ref %>"><%= ((r.score.to_f / total.to_f) * 100).round %></td>
+      <td class="lineitem"><a href="/quiz/review_mod/<%= r.ref %>">View Quiz</a></td>
+        </tr>
+        <% end %>            
+      </table>
+        <% end %>
+      </div>
+      <%= token_tag %>
+      <script type="text/javascript" src="/javascripts/quizUtil.js?<%= rand(10000) %>"></script>
+      <script type="text/javascript" src="/jsgen/results/<%= @quiz.ref %>.js?attr=<%= params[:attr] ||= 0 %>&order=<%= params[:order] ||= 0 %>"></script>
+      <div id="bottom">
+      
+      </div>
+    </div>
+  </body>
+</html>

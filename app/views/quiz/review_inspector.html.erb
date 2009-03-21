@@ -1,0 +1,31 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head>
+    <title>WebQuiz: Review Item</title>
+    <link rel="stylesheet" type="text/css" href="/stylesheets/baseWindow.css?<%= rand(10000) %>"/>
+    <script type="text/javascript" src="http://208.112.81.88/javascripts/prototype-min.js"></script>
+  </head>
+  <body onunload="nwcl='true';">
+      <div id="top">
+        <h1><% if @question.type2 == 5 or @question.type2 == 4 %>Question # <%= params[:c] %><% end %></h1>
+        <h3><% if @question.type2 == 5 %>Exact-Answer Question<% else %>Multiple-Choice Question<% end %></h3>
+        <div id="question_info">
+          <p><strong>Points:</strong> <%= @question.points %></p>
+          <% if @question.type2 == 5 %>
+          <p><strong>Type of Question:</strong> <% if @number %>Math<% else %>Word or Expression<% end %></p>
+          <p><% if @number %><strong>Allowed Percent Error:</strong> <%= @question.c2 %> <% if @question.c2 == "" %>0<% end %> %<% else %> <strong>Allowed Letters Misspelled:</strong> <%= @question.c2 %><% if @question.c2 == "" %>0<% end %><% end %> </p>
+          <% end %>
+          <p><strong>Explanation:</strong><% if @question.explanation == "" %><br><em>None provided.</em><% end %><br><%= @question.explanation %></p>
+          <button onclick="window.close();"><img src="/images/cross.png"> Close</button>
+        </div>
+      </div>
+       <div id="cfca">
+       </div>
+        <script type="text/javascript">
+        new Ajax.PeriodicalUpdater('cfca', '/quiz/cfca/<%= @taken.quiz.ref %>', {
+          method: 'get', frequency: 3, evalScripts:true
+        });
+      </script>
+  </body>
+</html>

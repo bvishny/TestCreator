@@ -1,0 +1,50 @@
+<div onclick="Inspect(this.id);" id="item_<%= @item.id %>" class="item">
+  <% if @item.type2 == 1 %>
+    <h2 id="h2_<%= @item.ref %>"><%= h @item.text %></h2>
+    <script type="text/javascript">
+       H2InPlace('<%= @item.ref %>');
+    </script>
+  <% elsif @item.type2 == 2 %>
+    <span id="txt_<%= @item.ref %>"><%= h @item.text %></span>
+    <script type="text/javascript">
+       TXTInPlace('<%= @item.ref %>');
+    </script>
+  <% elsif @item.type2 == 3 %>
+    <img class="scale-image<%= @item.id %>" <% unless flash[:url_change] %>style="width:<%= h @item.c1 %>px;height:<%= h @item.c2 %>px" width="<%= h @item.c1 %>" height="<%= h @item.c2 %>"<% end %> id="img<%= @item.id %>" src="<%= h @item.url %>" />
+    <script type="text/javascript">
+      OriginalWidth('<%= @item.ref %>', Element.getWidth('img<%= @item.id %>'));
+      OriginalHeight('<%= @item.ref %>', Element.getHeight('img<%= @item.id %>'));
+    </script>
+  <% elsif @item.type2 == 4 %>
+    <span id="txt_<%= @item.ref %>" style="font-weight:600"><%= h @item.text %></span><br>
+      <input type="radio" <% if @item.answer == "A" %>checked="checked"<% end %> onchange="Answer('<%= @item.ref %>', this.value);" name="group_<%= @item.ref %>" value="A"> <span id="c1_<%= @item.ref %>"><%= h @item.c1 %></span><br>
+      <input type="radio" <% if @item.answer == "B" %>checked="checked"<% end %> onchange="Answer('<%= @item.ref %>', this.value);" name="group_<%= @item.ref %>" value="B"> <span id="c2_<%= @item.ref %>"><%= h @item.c2 %></span><br>
+      <input type="radio" <% if @item.answer == "C" %>checked="checked"<% end %> onchange="Answer('<%= @item.ref %>', this.value);" name="group_<%= @item.ref %>" value="C"> <span id="c3_<%= @item.ref %>"><%= h @item.c3 %></span><br>
+      <input type="radio" <% if @item.answer == "D" %>checked="checked"<% end %> onchange="Answer('<%= @item.ref %>', this.value);" name="group_<%= @item.ref %>" value="D"> <span id="c4_<%= @item.ref %>"><%= h @item.c4 %></span><br>
+      <input type="radio" <% if @item.answer == "E" %>checked="checked"<% end %> onchange="Answer('<%= @item.ref %>', this.value);" name="group_<%= @item.ref %>" value="E"> <span id="c5_<%= @item.ref %>"><%= h @item.c5 %></span><br>
+    <script type="text/javascript">
+       TXTInPlace('<%= @item.ref %>');
+       <% for i in 1..5 %>
+         MCInPlace('<%= @item.ref %>', '<%= i %>');
+       <% end %>
+    </script>
+  <% elsif @item.type2 == 5 %>
+    <span style="font-weight:600" id="txt_<%= @item.ref %>"><%= h @item.text %></span><br>
+    <input type="text" value="<%= h @item.answer %>" id="exact_answer_<%= @item.ref %>" onchange="Answer('<%= @item.ref %>', this.value);" name="exact_answer" /> <span id="c1_<%= @item.ref %>"><%= h @item.c1 %></span>
+    <script type="text/javascript">
+       TXTInPlace('<%= @item.ref %>');
+       MCInPlace('<%= @item.ref %>', '1');
+    </script>
+  <% end %>
+</div>
+<script type="text/javascript">
+  new Effect.Highlight('item_<%= @item.id %>', {startcolor:'#C9E2FB'});
+       Sortable.create("itemcanvas", { tag:'div', only:'item',
+      onUpdate: function() {
+      new Ajax.Request("/quiz/reorder/<%= @item.quiz.ref %>", {
+      method: "post",
+      parameters: { data: Sortable.serialize("itemcanvas"), authenticity_token:auth }
+      });
+      }
+      });
+</script>

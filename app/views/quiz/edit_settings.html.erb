@@ -1,0 +1,75 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head>
+    <title>WebQuiz: Edit Settings</title>
+    <link rel="stylesheet" type="text/css" href="/stylesheets/editor.css?<%= rand(10000) %>"/>
+    <script type="text/javascript" src="http://208.112.81.88/javascripts/prototype-min.js"></script>
+  </head>
+  <body>
+    <div id="container">
+      <div id="top">
+        <h1>Edit Settings</h1>
+        <h3 id="titleh1"><%= @quiz.name %></h3>
+        <div id="logo2">
+          <img src="/images/logo.gif" width="64" height="64"/>
+        </div>
+      </div>
+      <div id="menu">
+         <a href="/user/home">Home</a>
+          <a href="/user/edit">My Profile</a>
+          <a href="/user/take_quizzes">Take Quizzes</a>
+          <a href="/user/quizzes">My Quizzes</a>
+          <a href="/quiz/new" style="color:#173A7A;">Quiz Editor</a>
+          <a href="/user/logout">Logout</a>
+          <select style="position:relative;left:60px;" id="editorChange" onchange="location=$('editorChange').options[$('editorChange').selectedIndex].value">
+            <option value="#">Settings Editor</option>
+            <option value="/quiz/edit/<%= @quiz.ref %>">Question Editor</option>
+          </select>
+      </div>
+      <div id="content">
+        <div id="update">
+        </div>
+        <form action="/quiz/update/<%= @quiz.ref %>" method="post" name="frmQuizCreate">
+         <%= token_tag %>
+          <p>
+            Name:<br>
+            <input name="quiz[name]" onchange="$('titleh1').update(this.value);" class="field" value="<%= @quiz.name %>" size="35" type="text"/>
+          </p>
+          <a href="javascript:void(0);" onclick="Element.toggle('advanced');">Toggle Advanced Settings</a>
+          <div id="advanced" style="display:none;margin-bottom:5px;">
+            <p>
+              Password Protect:<br>
+              <select name="quiz[password_protect]" class="field">
+                <option value="0"<% if @quiz.password_protect == 0 %> selected="selected"<% end %>>No</option>
+                <option value="1"<% if @quiz.password_protect == 1 %> selected="selected"<% end %>>Yes</option>
+              </select>
+            </p>
+            <p>
+              Password:<br>
+              <input type="text" name="quiz[password]" value="<%= @quiz.password %>" class="field" />
+            </p>
+            <p>Attempts Allowed:<br>
+            <input type="text" size="2" name="quiz[attempts]" value="<%= @quiz.attempts %>" class="field" />
+            </p>
+            <p>Total Points:<br>
+            <input type="text" size="2" name="quiz[total]" value="<%= @quiz.total %>" class="field" />
+            </p>
+            <p>
+            Visible on Search:<br>
+            <select name="search" class="field">
+                <option value="0"<% if @quiz.searchable == 0 %> selected="selected"<% end %>>No</option>
+                <option value="1"<% if @quiz.searchable == 1 %> selected="selected"<% end %>>Yes</option>
+              </select>
+            </p>
+          </div><p>
+          <button name="btnSubmit" type="submit">Submit</button>
+          </p>
+          </form>
+      </div>
+      <div id="bottom">
+      
+      </div>
+    </div>
+  </body>
+</html>
