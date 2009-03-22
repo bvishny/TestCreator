@@ -18,6 +18,7 @@
 			<div id="top" style="background-color:#333333;padding:3px;color:#FFFFFF;font-family:Georgia, Verdana, Arial, Lucida, Helvetica;font-size:18px;">Reptile Image Search</div>
 			<div id="content" style="padding:5px;">
 				<form action="/herpetology/genus" method="post">
+					<%= token_tag %>
 					Genus: <input name="id" type="text" style="border:1px solid #B7B7B7;font-size:18px;font-family:Georgia, Verdana, Arial, Lucida, Helvetica;padding:2px 5px;"/> <button name="binderBtn" type="button" style="cursor:pointer;background-color:#999999;border:1px solid #999999;padding:2px 5px;color:#FFFFFF;font-size:18px;font-family:Georgia, Verdana, Arial, Lucida, Helvetica;" onclick="$('binder').name = 'binder';this.innerHTML = 'Binder Mode: On';this.style.background = '#3B5998';this.style.border='1px solid #3B5998';">Binder Mode: Off</button><input type="hidden" name="" id="binder" value="true"/><br><br>
 					<button name="submit" type="submit" style="cursor:pointer;background-color:#333333;border:2px dashed #000000;padding:2px 5px;color:#FFFFFF;font-size:18px;font-family:Georgia, Verdana, Arial, Lucida, Helvetica;">Submit</button>
 				</form>
