@@ -1,7 +1,6 @@
 class HerpetologyController < ApplicationController
   before_filter :init_main, :except => [:index]
   after_filter :update_herps, :except => [:index]
-  layout 'blank'
   def quiz
     @taxa = Dir.entries("/vservers/interech/woofic/herps/").delete_if {|x| x == ".." or x == "." }
   end
