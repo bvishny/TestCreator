@@ -148,7 +148,6 @@ class HerpetologyController < ApplicationController
   def init_main
     require 'open-uri'
     require 'hpricot'
-    require 'mechanize'
     if session[:herps]
       @herps = session[:herps]
     else
