@@ -335,22 +335,22 @@ class QuizController < ApplicationController
     @quiz = @user.quizzes.find_by_ref(params[:id])
     @part = Part.find_by_ref(params[:ref])
     @item = Item.new
-    @item.quiz = @quiz
+    @item.quiz = @quiz 
     @item.type2 = @part.type2
-    @item.url = @part.url
-    @item.text = @part.text
-    @item.points = @part.points
-    @item.c1 = @part.c1
-    @item.c2 = @part.c2
-    @item.c3 = @part.c3
-    @item.c4 = @part.c4
-    @item.c5 = @part.c5
-    @item.answer = @part.answer
-    @item.explanation = @part.explanation
-    @item.context = @part.context
-    @item.pc_error = @part.pc_error
-    @item.capitalize = @part.capitalize
-    @item.levenshtein = @part.levenshtein
+    @item.url = @part.url ||= ""
+    @item.text = @part.text ||= ""
+    @item.points = @part.points ||= 0.0
+    @item.c1 = @part.c1 ||= ""
+    @item.c2 = @part.c2 ||= ""
+    @item.c3 = @part.c3 ||= ""
+    @item.c4 = @part.c4 ||= ""
+    @item.c5 = @part.c5 ||= ""
+    @item.answer = @part.answer ||= ""
+    @item.explanation = @part.explanation ||= ""
+    @item.context = @part.context ||= ""
+    @item.pc_error = @part.pc_error ||= 0.0
+    @item.capitalize = @part.capitalize ||= 1
+    @item.levenshtein = @part.levenshtein ||= 1
     order = @quiz.items.maximum('order_index').to_i
     @item.order_index = order + 1
     @item.ref = newpass(32)
