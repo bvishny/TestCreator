@@ -359,7 +359,7 @@ class QuizController < ApplicationController
   def results
     attr = ["updated_at", "score", "updated_at"]
     order = ["ASC", "DESC"]
-    i = params[:attr].to_i ||= 0
+    i = params[:attr].to_i ||= 2
     j = params[:order].to_i ||= 0
     @quiz = @user.quizzes.find_by_ref(params[:id])
     @results = @quiz.takens.find(:all, :conditions => ["status = 1"], :order => ["#{attr[i]} #{order[j]}"])
