@@ -365,7 +365,7 @@ class QuizController < ApplicationController
     @results = @quiz.takens.find(:all, :conditions => ["status = 1"], :order => ["#{attr[i]} #{order[j]}"])
     if i == 2
       @results.sort! { |a,b| a.user.name.downcase <=> b.user.name.downcase }
-      if j == 0
+      if j == 1
        @results.reverse!
       end 
     end
