@@ -357,7 +357,7 @@ class QuizController < ApplicationController
     @item.save!
   end
   def results
-    attr = ["updated_at", "score"]
+    attr = ["updated_at", "score", "name"]
     order = ["ASC", "DESC"]
     i = params[:attr].to_i ||= 0
     j = params[:order].to_i ||= 0
