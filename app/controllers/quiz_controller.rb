@@ -359,10 +359,16 @@ class QuizController < ApplicationController
   def results
     attr = ["updated_at", "score"]
     order = ["ASC", "DESC"]
-    i = params[:attr].to_i ||= 0
+    i = params[:attr].to_i ||= 2
     j = params[:order].to_i ||= 0
     @quiz = @user.quizzes.find_by_ref(params[:id])
     @results = @quiz.takens.find(:all, :conditions => ["status = 1"], :order => ["#{attr[i]} #{order[j]}"])
+    if i == 2
+      @results.sort! { |a,b| a.user.name.downcase < => b.user.name.downcase }
+      if j == 0
+       @results.reverse!
+      end 
+    end
   end
   def edit_settings
     @quiz = @user.quizzes.find_by_ref(params[:id])
