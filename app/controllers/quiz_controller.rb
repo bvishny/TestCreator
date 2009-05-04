@@ -364,7 +364,7 @@ class QuizController < ApplicationController
     @quiz = @user.quizzes.find_by_ref(params[:id])
     @results = @quiz.takens.find(:all, :conditions => ["status = 1"], :order => ["#{attr[i]} #{order[j]}"])
     if i == 2
-      @results.sort! { |a,b| a.user.name.downcase < => b.user.name.downcase }
+      @results.sort! { |a,b| a.user.name.downcase <=> b.user.name.downcase }
       if j == 0
        @results.reverse!
       end 
