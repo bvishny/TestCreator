@@ -30,7 +30,7 @@
            <img src="/images/exclamation.png"/> There are no results available for this quiz!
         <% else %>
       <br>
-      <form action="?" method="post" name="order"><strong style="color:#173A7A">Order By:</strong> <%= token_tag %><select name="attr" onchange="document.forms.order.submit();"><option value="0" <% if params[:attr].to_i == 0 %>selected="selected"<% end %>>Date Updated</option><option value="1" <% if params[:attr].to_i == 1 %>selected="selected"<% end %>>Score</option><option value="2" % if params[:attr].to_i == 2 %>selected="selected"<% end %>>Name</option></select> in <select name="order" onchange="document.forms.order.submit();"><option value="0" <% if params[:order].to_i == 0 %>selected="selected"<% end %>>Ascending</option><option value="1" <% if params[:order].to_i == 1 %>selected="selected"<% end %>>Descending</option></select> order</form><br>
+      <form action="?" method="post" name="order"><strong style="color:#173A7A">Order By:</strong> <%= token_tag %><select name="attr" onchange="document.forms.order.submit();"><option value="0" <% if params[:attr].to_i == 0 %>selected="selected"<% end %>>Date Updated</option><option value="1" <% if params[:attr].to_i == 1 %>selected="selected"<% end %>>Score</option><option value="2" <% if params[:attr].to_i == 2 %>selected="selected"<% end %>>Name</option></select> in <select name="order" onchange="document.forms.order.submit();"><option value="0" <% if params[:order].to_i == 0 %>selected="selected"<% end %>>Ascending</option><option value="1" <% if params[:order].to_i == 1 %>selected="selected"<% end %>>Descending</option></select> order</form><br>
       <table id="quiztable" cellspacing="0">
         <tr>
           <th scope="col">Participant Name</th>
