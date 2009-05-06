@@ -386,8 +386,8 @@ class QuizController < ApplicationController
   end
   def image_proxy
   	item = Item.find_by_ref(params[:id])
-  	taken = @user.takens.find(:first, :condition => ["quiz_id = ?", item.quiz.id])
-  	if ! taken.blank?
+  	#taken = @user.takens.find(:first, :condition => ["quiz_id = ?", item.quiz.id])
+  	if taken
   	 require 'net/http'
       url = URI.parse(item.c4)
       req = Net::HTTP::Get.new(url.path)
