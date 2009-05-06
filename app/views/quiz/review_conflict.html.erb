@@ -25,7 +25,7 @@
       </div>
       <div id="content">
        <p><img src="/images/exclamation.png"> You cannot review a quiz while you are taking it!</p> <p> Please submit or end your current attempt to review the quiz. </p>
-        <form action="/quiz/take_quizzes" method="post">
+        <form action="/user/take_quizzes" method="post">
           <%= token_tag %>
           <p><button type="submit">Back</button></p>
         </form>
