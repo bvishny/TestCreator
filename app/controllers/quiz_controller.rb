@@ -18,8 +18,6 @@ class QuizController < ApplicationController
       if @quiz.password_protect == 2
         redirect_to :action => :process_page, :id => "unavailable", :ref => @quiz.ref
       elsif not current_attempt.blank? 
-        flash[:current_attempt] = current_attempt.ref
-   	    flash[:review_attempt] = @quiz.ref
         redirect_to :action => :resume, :id => current_attempt.ref
       elsif takens.size >= attempts and @quiz.password_protect != 2
         redirect_to :action => :process_page, :id => "attempts", :ref => @quiz.ref
@@ -41,8 +39,6 @@ class QuizController < ApplicationController
     @quiz = Quiz.find_by_ref(params[:id])
     @current_attempt = @user.takens.find(:first, :conditions => ["quiz_id = ? and status = 2", @quiz.id])
     if not @current_attempt.blank?
-   	  flash[:current_attempt] = @current_attempt.ref
-   	  flash[:review_attempt] = @quiz.ref
       render :text => "<script type='text/javascript'>document.location.href='/quiz/process_page/current_review'</script>"
     else
       render :text => "<!-- ok  -->"
@@ -219,9 +215,6 @@ class QuizController < ApplicationController
     @quiz = @user.takens.find(:first, :conditions => ["ref = ? and status = 2", params[:id]])
     unless @quiz.blank?
       @quiz.destroy
-    end
-    if params[:direct_redirect]
-     redirect_to :controller => :quiz, :action => :review, :id => params[:review_attempt]
     end
   end
   def create
