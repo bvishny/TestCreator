@@ -18,7 +18,7 @@ class QuizController < ApplicationController
       if @quiz.password_protect == 2
         redirect_to :action => :process_page, :id => "unavailable", :ref => @quiz.ref
       elsif not current_attempt.blank? 
-        flash[:current_attempt] = @current_attempt.ref
+        flash[:current_attempt] = current_attempt.ref
    	    flash[:review_attempt] = @quiz.ref
         redirect_to :action => :resume, :id => current_attempt.ref
       elsif takens.size >= attempts and @quiz.password_protect != 2
