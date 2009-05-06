@@ -42,7 +42,7 @@
         <% elsif item.type2 == 2 %>
             <span id="txt_<%= item.ref %>"><%= h item.text %></span>
           <% elsif item.type2 == 3 %>
-            <img style="width:<%= h item.c1 %>px;height:<%= h item.c2 %>px" id="img<%= item.id %>" src="<%= h item.url %>" width="<%= h item.c1 %>" height="<%= h item.c2 %>"/>
+            <img style="width:<%= h item.c1 %>px;height:<%= h item.c2 %>px" id="img<%= item.id %>" src="/quiz/image_proxy/<%= h item.ref %>" width="<%= h item.c1 %>" height="<%= h item.c2 %>"/>
           <% elsif item.type2 == 4 %>
 <% count += 1 %>
     <%= count %>. <span id="txt_<%= item.ref %>" style="font-weight:600"><%= h item.text %></span><br>
