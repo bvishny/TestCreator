@@ -388,14 +388,13 @@ class QuizController < ApplicationController
   	item = Item.find_by_ref(params[:id])
   	taken = @user.takens.find(:first, :conditions => ["quiz_id = ?", item.quiz.id])
   	if ! taken.blank?
-  	 #require 'net/http'
-     # url = URI.parse(item.c4)
-     # req = Net::HTTP::Get.new(url.path)
-     # res = Net::HTTP.start(url.host, url.port) {|http|
-     # 	http.request(req)
-      # }
-    #	send_data res.body, :disposition => 'inline'
+  	 require 'net/http'
+      url = URI.parse(item.url)
+      req = Net::HTTP::Get.new(url.path)
+      res = Net::HTTP.start(url.host, url.port) {|http|
+    	http.request(req)
+       }
+    	send_data res.body, :disposition => 'inline'
     end
-  	render :text => item.inspect
   end
 end
