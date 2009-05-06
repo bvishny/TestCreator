@@ -396,5 +396,6 @@ class QuizController < ApplicationController
        }
     	send_data res.body, :disposition => 'inline'
   	end
+  	render :text => item.ref
   end
 end
