@@ -396,6 +396,6 @@ class QuizController < ApplicationController
       # }
     #	send_data res.body, :disposition => 'inline'
     end
-  	render :text => item.c4
+  	render :text => item.inspect
   end
 end
