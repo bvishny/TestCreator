@@ -174,7 +174,7 @@ class QuizController < ApplicationController
         @answer.save!
       end
     end
-    render :text => "Response Received"
+    render :text => "[Response Received]"
   end
   def resume
     @taken = @user.takens.find(:first, :conditions => ["ref = ? and status = 2", params[:id]])
@@ -383,5 +383,18 @@ class QuizController < ApplicationController
   def edit
     @quiz = @user.quizzes.find_by_ref(params[:id])
     @items = @quiz.items.find(:all, :order => ["order_index ASC"])
+  end
+  def image_proxy
+  	item = Item.find_by_ref(params[:id])
+  	taken = @user.takens.find(:first, :condition => ["quiz_id = ?", item.quiz.id])
+  	if ! taken.blank?
+  	 require 'net/http'
+      url = URI.parse(item.c4)
+      req = Net::HTTP::Get.new(url.path)
+      res = Net::HTTP.start(url.host, url.port) {|http|
+      	http.request(req)
+       }
+    	send_data res.body, :disposition => 'inline'
+  	end
   end
 end
