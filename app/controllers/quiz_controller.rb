@@ -39,9 +39,7 @@ class QuizController < ApplicationController
     @quiz = Quiz.find_by_ref(params[:id])
     @current_attempt = @user.takens.find(:first, :conditions => ["quiz_id = ? and status = 2", @quiz.id])
     if not @current_attempt.blank?
-      flash[:current_attempt] = @current_attempt.ref
-      flash[:review_attempt] = @quiz.ref
-      render :text => "<script type='text/javascript'>document.location.href='/quiz/process_page/current_review'</script>"
+      render :text => "<script type='text/javascript'>document.location.href='/quiz/process_page/current_review?current_attempt=#{@current_attempt.ref}&review_attempt=#{@quiz.ref}'</script>"
     else
       render :text => "<!-- ok  -->"
     end
