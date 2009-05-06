@@ -394,7 +394,8 @@ class QuizController < ApplicationController
       res = Net::HTTP.start(url.host, url.port) {|http|
     	http.request(req)
        }
-    	send_data res.body, :disposition => 'inline'
+       type = item.url.split('.')[-1]
+    	send_data res.body, :filename => "quiz_item_#{rand(1000)}.#{type}", :type => "image/#{type.gsub('jpg', 'jpeg')}", :disposition => 'inline'
     end
   end
 end
