@@ -25,9 +25,11 @@
       </div>
       <div id="content">
        <p><img src="/images/exclamation.png"> You cannot review a quiz while you are taking it!</p> <p> Please submit or end your current attempt to review the quiz. </p>
-        <form action="/user/take_quizzes" method="post">
+        <form action="/quiz/end_quiz/<%= flash[:current_attempt] %>" method="post">
           <%= token_tag %>
-          <p><button type="submit">Back</button></p>
+          <input type="hidden" name="direct_redirect" value="true"/>
+          <input type="hidden" name="review_attempt" value="<%= flash[:review_attempt] %>"/>
+          <p><button type="submit">End Quiz</button> <button type="button" onclick="location='/user/take_quizzes'">Back</button></p>
         </form>
       </div>
       <div id="bottom">

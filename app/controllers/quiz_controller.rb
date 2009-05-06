@@ -37,8 +37,10 @@ class QuizController < ApplicationController
   end
   def cfca
     @quiz = Quiz.find_by_ref(params[:id])
-    current_attempt = @user.takens.find(:first, :conditions => ["quiz_id = ? and status = 2", @quiz.id])
-    if not current_attempt.blank?
+    @current_attempt = @user.takens.find(:first, :conditions => ["quiz_id = ? and status = 2", @quiz.id])
+    if not @current_attempt.blank?
+      flash[:current_attempt] = @current_attempt.ref
+      flash[:review_attempt] = @quiz.ref
       render :text => "<script type='text/javascript'>document.location.href='/quiz/process_page/current_review'</script>"
     else
       render :text => "<!-- ok  -->"
@@ -215,6 +217,9 @@ class QuizController < ApplicationController
     @quiz = @user.takens.find(:first, :conditions => ["ref = ? and status = 2", params[:id]])
     unless @quiz.blank?
       @quiz.destroy
+    end
+    if params[:direct_redirect]
+     redirect_to :controller => :quiz, :action => :review, :id => params[:review_attempt]
     end
   end
   def create
