@@ -147,7 +147,12 @@ class QuizController < ApplicationController
     elsif @item.type2 == 5
       if @item.c2 != ""
         if is_number? @item.answer
-          if pc_error(params[:answer].to_f, @item.answer.to_f) <= @item.c2.to_f
+		  begin
+			answer = Float(params[:answer])
+		  rescue
+		    answer = params[:answer].to_f
+		  end
+          if pc_error(answer, @item.answer.to_f) <= @item.c2.to_f
             @answer.correct = 1
             @answer.save!
           else
