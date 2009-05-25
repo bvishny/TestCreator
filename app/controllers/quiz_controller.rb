@@ -337,7 +337,7 @@ class QuizController < ApplicationController
     render :text => @item.text
   end
   def edit_name
-    @quiz = @user.quizzes.find_by_ref(params[:quiz_ref])
+    @quiz = @user.quizzes.find_by_ref(params[:id])
     @quiz.name = params[:value]
     @quiz.save!
     render :text => @quiz.name
