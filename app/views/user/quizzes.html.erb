@@ -33,10 +33,10 @@
       <table id="quiztable" cellspacing="0">
         <tr>
         	<th scope="col">Name</th>
-        	<th scope="col">Points</th>
-        	<th scope="col">Take Quiz</th>
-        	<th scope="col">Edit Quiz</th>
-          	<th scope="col">View Results</th>
+        	<th scope="col">Pts</th>
+        	<th scope="col">Take</th>
+        	<th scope="col">Edit</th>
+          	<th scope="col">Results</th>
           	<th scope="col">X</th>
         </tr>
         <% for q in @quizzes %>
@@ -48,9 +48,9 @@
             <% total = q.total %>
           <% end %>
       <td class="lineitem"><%= total %></td>
-      <td class="lineitem"><a href="/quiz/take/<%= q.ref %>">Take Quiz</a></td>
-      <td class="lineitem"><a href="/quiz/edit/<%= q.ref %>">Edit Quiz</a></td>
-      <td class="lineitem"><a href="/quiz/results/<%= q.ref %>">View Results (<%= Taken.count(:all, :conditions => ["status = 1 and quiz_id = ?", q.id]) %>)</a></td>
+      <td class="lineitem"><a href="/quiz/take/<%= q.ref %>">Take</a></td>
+      <td class="lineitem"><a href="/quiz/edit/<%= q.ref %>">Edit</a></td>
+      <td class="lineitem"><a href="/quiz/results/<%= q.ref %>">Results (<%= Taken.count(:all, :conditions => ["status = 1 and quiz_id = ?", q.id]) %>)</a></td>
       <td class="lineitem"><a href="javascript:void(0)" onclick="deleteQuiz('<%= q.ref %>')">X</a></td>
         </tr>
         <% end %>            
