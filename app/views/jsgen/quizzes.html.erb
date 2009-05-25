@@ -1,6 +1,6 @@
 var names = document.getElementsByName('authenticity_token');
 var auth = names[0].value;
-// <%= params[:ref] %>
+
 <% for q in @user.quizzes %>
 new Ajax.InPlaceEditor('name_<%= q.ref %>', '/quiz/edit_name/<%= q.ref %>?authenticity_token=' + auth, {cols:15, cancelControl:'false', highlightcolor:'#C9E2FB', submitOnBlur:'true'});
 <% end %>

@@ -31,16 +31,16 @@
       <br>
       <table id="quiztable" cellspacing="0">
         <tr>
-          <th scope="col">Name</th>
-        <th scope="col">Points</th>
-                  <th scope="col">Take Quiz</th>
-        <th scope="col">Edit Quiz</th>
-          <th scope="col">View Results</th>
-          <th scope="col">X</th>
+        	<th scope="col">Name</th>
+        	<th scope="col">Points</th>
+        	<th scope="col">Take Quiz</th>
+        	<th scope="col">Edit Quiz</th>
+          	<th scope="col">View Results</th>
+          	<th scope="col">X</th>
         </tr>
         <% for q in @quizzes %>
          <tr id="row_<%= q.ref %>" style="background-color:<%= cycle('#E5EBF0', '#FFFFFF') %>;">
-        <td class="desc"><%= h q.name %></td>
+        <td class="desc"><span id="name_<%= q.ref %>"><%= h q.name %></span></td>
           <% if q.total == 0 %>
             <% total = Item.sum('points', :conditions => ["quiz_id = ?", q.id ]) %>
           <% else %>
@@ -49,8 +49,8 @@
       <td class="lineitem"><%= total %></td>
       <td class="lineitem"><a href="/quiz/take/<%= q.ref %>">Take Quiz</a></td>
       <td class="lineitem"><a href="/quiz/edit/<%= q.ref %>">Edit Quiz</a></td>
-        <td class="lineitem"><a href="/quiz/results/<%= q.ref %>">View Results (<%= Taken.count(:all, :conditions => ["status = 1 and quiz_id = ?", q.id]) %>)</a></td>
-          <td class="lineitem"><a href="javascript:void(0)" onclick="deleteQuiz('<%= q.ref %>')">X</a></td>
+      <td class="lineitem"><a href="/quiz/results/<%= q.ref %>">View Results (<%= Taken.count(:all, :conditions => ["status = 1 and quiz_id = ?", q.id]) %>)</a></td>
+      <td class="lineitem"><a href="javascript:void(0)" onclick="deleteQuiz('<%= q.ref %>')">X</a></td>
         </tr>
         <% end %>            
       </table>
@@ -58,6 +58,7 @@
       </div>
       <%= token_tag %>
       <script type="text/javascript" src="/javascripts/quizUtil.js?<%= rand(10000) %>"></script>
+	  <script type="text/javascript" src="/jsgen/quizzes?<%= rand(1000000) %>"></script>
       <div id="bottom">
       
       </div>
