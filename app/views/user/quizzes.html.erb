@@ -48,10 +48,10 @@
             <% total = q.total %>
           <% end %>
       <td class="lineitem"><%= total %></td>
-      <td class="lineitem"><a href="/quiz/take/<%= q.ref %>">Take</a></td>
-      <td class="lineitem"><a href="/quiz/edit/<%= q.ref %>">Edit</a></td>
-      <td class="lineitem"><a href="/quiz/results/<%= q.ref %>">Results (<%= Taken.count(:all, :conditions => ["status = 1 and quiz_id = ?", q.id]) %>)</a></td>
-      <td class="lineitem"><a href="javascript:void(0)" onclick="deleteQuiz('<%= q.ref %>')">X</a></td>
+      <td class="lineitem"><a href="/quiz/take/<%= q.ref %>"><img src="/images/page_white_edit.png"/></a></td>
+      <td class="lineitem"><a href="/quiz/edit/<%= q.ref %>"><img src="/images/page_edit.png"/></a></td>
+      <td class="lineitem"><a href="/quiz/results/<%= q.ref %>">View (<%= Taken.count(:all, :conditions => ["status = 1 and quiz_id = ?", q.id]) %>)</a></td>
+      <td class="lineitem"><a href="javascript:void(0)" onclick="deleteQuiz('<%= q.ref %>')"><img src="/images/icons.delete.png"/></a></td>
         </tr>
         <% end %>            
       </table>
