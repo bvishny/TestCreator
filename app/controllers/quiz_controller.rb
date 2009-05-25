@@ -126,19 +126,20 @@ class QuizController < ApplicationController
     @taken = @user.takens.find(:first, :conditions => ["quiz_id = ? and status = 2", @quiz.id])
     @item = @quiz.items.find_by_ref(params[:ref])
     answer_test = @taken.answers.find(:first, :conditions => ["item_id = ?", @item.id])
+    gsubanswer = params[:answer].gsub("$$$$", " ")
     if answer_test.blank?
       @answer = Answer.new
       @answer.item_id = @item.id
       @answer.ref = newpass(32)
       @answer.taken = @taken
-      @answer.answer = params[:answer]
+      @answer.answer = gsubanswer
     else
       @answer = answer_test
-      @answer.answer = params[:answer]
+      @answer.answer = gsubanswer
     end
     if @item.type2 == 4
-      user_answer = params[:answer]
-      if @item.answer == user_answer
+      user_answer = gsubanswer
+      if @item.answer == gsubanswer
         @answer.correct = 1
       else
         @answer.correct = 0
@@ -148,9 +149,9 @@ class QuizController < ApplicationController
       if @item.c2 != ""
         if is_number? @item.answer
 		  begin
-			answer = Float(params[:answer])
+			  answer = Float(gsubanswer)
 		  rescue
-		    answer = params[:answer].to_f
+		    answer = gsubanswer.to_f
 		  end
           if pc_error(answer, @item.answer.to_f) <= @item.c2.to_f
             @answer.correct = 1
@@ -160,7 +161,7 @@ class QuizController < ApplicationController
             @answer.save!
           end 
         else
-         user_answer = params[:answer].capitalize
+         user_answer = gsubanswer.capitalize
          if levenshtein(user_answer, @item.answer.capitalize) <= @item.c2.to_i
           @answer.correct = 1
           @answer.save!
@@ -170,7 +171,7 @@ class QuizController < ApplicationController
          end
         end
       else
-        user_answer = params[:answer]
+        user_answer = gsubanswer
         if @item.answer == user_answer
           @answer.correct = 1
         else

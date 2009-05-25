@@ -5,7 +5,7 @@ var quiz_ref = $('quiz_ref').value;
 
 function SubmitAnswer(ref, answer) {
  $('btnSubmit').update("Please wait..");
-  new Ajax.Request('/quiz/check_answer/', {asynchronous:true, onComplete:function(){$('btnSubmit').update("<img src='/images/icons/accept.png'/> Submit Quiz");}, parameters:{authenticity_token:auth, quiz_ref:quiz_ref, ref:ref, answer:answer}});
+  new Ajax.Request('/quiz/check_answer/', {asynchronous:true, onComplete:function(){$('btnSubmit').update("<img src='/images/icons/accept.png'/> Submit Quiz");}, parameters:{authenticity_token:auth, quiz_ref:quiz_ref, ref:ref, answer:answer.replace(" ", "$$$$")}});
 }
 function InspectorWindow(params, id) {
   if (current_inspect != '') {
