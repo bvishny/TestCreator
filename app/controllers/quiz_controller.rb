@@ -387,7 +387,7 @@ class QuizController < ApplicationController
     @results = @quiz.takens.find(:all, :conditions => ["status = 1"])
     require 'gruff'
     g = Gruff::Pie.new
-    g.title = ""
+    g.title = " "
     scores = {  
       "0-50" => 0,  
       "50-60" => 0,  
