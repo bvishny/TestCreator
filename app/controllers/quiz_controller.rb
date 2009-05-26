@@ -400,17 +400,17 @@ class QuizController < ApplicationController
     for r in @results
       score = (r.score.to_f / @quiz.total.to_f)
       case score
-      when (0.0 <= score < 0.5)
+      when (0.0 <= score and score < 0.5)
         scores["0-50"] += 1
-      when (0.5 <= score < 0.6)
+      when (0.5 <= score and score < 0.6)
         scores["50-60"] += 1
-      when (0.6 <= score < 0.7)
+      when (0.6 <= score and score < 0.7)
         scores["60-70"] += 1
-      when (0.7 <= score < 0.8)
+      when (0.7 <= score and score < 0.8)
         scores["70-80"] += 1
-      when (0.8 <= score < 0.9)
+      when (0.8 <= score and score < 0.9)
         scores["80-90"] += 1
-      when (0.9 <= score < 1.0)
+      when (0.9 <= score and score < 1.0)
         scores["90-100"] += 1
       when score == 1.0
         scores["100"] += 1
