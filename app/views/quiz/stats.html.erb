@@ -1,0 +1,55 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head>
+    <title>WebQuiz: <%= @quiz.name %></title>
+    <link rel="stylesheet" type="text/css" href="/stylesheets/base.css?<%= rand(10000) %>"/>
+    <script type="text/javascript" src="http://208.112.81.88/javascripts/prototype-min.js"></script>
+    <script type="text/javascript" src="http://208.112.81.88/javascripts/effects-min.js"></script>
+    <script type="text/javascript" src="http://208.112.81.88/javascripts/controls.js"></script>
+  </head>
+  <body>
+    <div id="container">
+      <div id="top">
+        <h1><%= @quiz.name %></h1>
+        <h3>Statistics</h3>
+        <div id="logo2">
+          <img src="/images/logo.gif" width="64" height="64"/>
+        </div>
+      </div>
+      <div id="menu">
+          <a href="/user/home">Home</a>
+          <a href="/user/edit">My Profile</a>
+          <a href="/user/take_quizzes">Take Quizzes</a>
+          <a href="/user/quizzes" style="color:#173A7A;">My Quizzes</a>
+          <a href="/quiz/new">New Quiz</a>
+          <a href="/user/logout">Logout</a>
+      </div>
+      <div id="content">
+  		<img src="/quiz/stats_pie/<%= @quiz.ref %>" height="300" width="400"/>
+      <br>
+
+      <table id="quiztable" cellspacing="0">
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Type</th>
+          <th scope="col">Portion Correct</th>
+          <th scope="col">%</th>
+        </tr>
+		<% n = 1 %>
+		<% for r in @quiz.items.find(:all, :conditions => ["type2 = 4 or type2 = 5"], :order => ["order_index ASC"]) %>
+         <tr id="row_<%= r.ref %>" style="background-color:<%= cycle('#E5EBF0', '#FFFFFF') %>;">
+        <td class="desc"><%= n %></td> <% n += 1 %>
+        <td class="lineitem"><%= r.type2.to_s.gsub("4", "Multiple Choice").gsub("5", "Exact Answer") %></td>
+		<td class="lineitem"><%= @correct["q#{r.order_index}"] %> / <%= @count %></td>
+		<td></td>
+        </tr>           
+      </table>
+      </div>
+      <%= token_tag %>
+      <div id="bottom">
+      
+      </div>
+    </div>
+  </body>
+</html>

@@ -423,12 +423,26 @@ class QuizController < ApplicationController
             :colors => @colors,
             :marker_color => 'black',
             :font_color => 'black',
-            :background_colors => ['#d1edf5', 'white']
+            :background_colors => ['white', 'white']
           }
     scores.each {|key, value| g.data(key.to_s, value)}  
     send_data g.to_blob, :type => "image/png", :disposition => 'inline'
   end
   def stats
+    @correct = {}
+    @quiz = @user.quizzes.find_by_ref(params[:id])
+    for i in @quiz.items.find(:all, :conditions => ["type2 = 4 or type2 = 5"])
+      @correct["q#{i.order_index}"] = 0
+    end
+    @count = 0 
+    for t in @quiz.takens.find(:all, :conditions => ["status = 1"])
+      @count += 1
+      for a in t.answers
+        if a.correct == 1
+          @correct["q#{a.item.order_index}"] += 1
+        end
+      end
+    end
   end
   def edit_settings
     @quiz = @user.quizzes.find_by_ref(params[:id])
