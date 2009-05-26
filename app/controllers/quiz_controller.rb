@@ -405,13 +405,13 @@ class QuizController < ApplicationController
         scores["50-60"] += 1
       elsif (score >= 0.6 and score < 0.7)
         scores["60-70"] += 1
-      when (score >= 0.7 and score < 0.8)
+      elsif (score >= 0.7 and score < 0.8)
         scores["70-80"] += 1
-      when (score >= 0.8 and score < 0.9)
+      elsif (score >= 0.8 and score < 0.9)
         scores["80-90"] += 1
-      when (score >= 0.9 and score < 1.0)
+      elsif (score >= 0.9 and score < 1.0)
         scores["90-100"] += 1
-      when score == 1.0
+      elsif score == 1.0
         scores["100"] += 1
       end
     end
