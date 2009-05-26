@@ -393,7 +393,7 @@ class QuizController < ApplicationController
       "50-60" => 0,  
       "60-70" => 0,  
       "70-80" => 0,  
-      "80-90" => 0,  
+      "80-90" => 5,  
       "90-100" => 0,
       "100" => 0
     }
@@ -416,6 +416,7 @@ class QuizController < ApplicationController
         scores["100"] += 1
       end
     end
+    g.theme_37signals()
     scores.each {|key, value| g.data(key.to_s, value)}  
     #send_data g.to_blob, :type => "image/png", :disposition => 'inline'
     render :text => scores.inspect.to_s
