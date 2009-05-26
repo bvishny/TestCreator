@@ -11,7 +11,7 @@
   <body>
     <div id="container">
       <div id="top">
-        <h1><%= @quiz.name %></h1>
+        <h1><%= h @quiz.name %></h1>
         <h3>Statistics</h3>
         <div id="logo2">
           <img src="/images/logo.gif" width="64" height="64"/>
@@ -26,10 +26,10 @@
           <a href="/user/logout">Logout</a>
       </div>
       <div id="content">
-	<h2>Graph Analysis</h2>
+	<h2><%= h @quiz.name %>: Overall Performance </h2>
   		<img src="/quiz/stats_pie/<%= @quiz.ref %>" height="450" width="600"/>
       <br>
-	<h2>Item Analysis</h2>
+	<h2>Item Analysis</h2><br>
       <table id="quiztable" cellspacing="0">
         <tr>
           <th scope="col">#</th>
