@@ -382,7 +382,7 @@ class QuizController < ApplicationController
       end 
     end
   end
-  def stats
+  def stats_pie
     @quiz = @user.quizzes.find_by_ref(params[:id])
     @results = @quiz.takens.find(:all, :conditions => ["status = 1"])
     require 'gruff'
@@ -418,15 +418,7 @@ class QuizController < ApplicationController
         scores["100+"] += 1
       end
     end
-    @green = '#339933'
-        @purple = '#cc99cc'
-        @blue = '#336699'
-        @yellow = '#FFF804'
-        @red = '#ff0000'
-        @orange = '#cf5910'
-        @black = 'black'
-        @other = "#0099FF"
-        @colors = [@yellow, @blue, @green, @red, @purple, @orange, @black, @other]
+    @colors = ['#FFF804', '#336699', '#339933', '#ff0000', '#cc99cc', '#cf5910', 'black', "#0099FF"]
     g.theme = {
             :colors => @colors,
             :marker_color => 'black',
@@ -435,7 +427,8 @@ class QuizController < ApplicationController
           }
     scores.each {|key, value| g.data(key.to_s, value)}  
     send_data g.to_blob, :type => "image/png", :disposition => 'inline'
-    #render :text => scores.inspect.to_s
+  end
+  def stats
   end
   def edit_settings
     @quiz = @user.quizzes.find_by_ref(params[:id])
