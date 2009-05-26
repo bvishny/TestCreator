@@ -382,6 +382,43 @@ class QuizController < ApplicationController
       end 
     end
   end
+  def stats
+    @quiz = @user.quizzes.find_by_ref(params[:id])
+    @results = @quiz.takens.find(:all, :conditions => ["status = 1"])
+    require 'gruff'
+    g = Gruff::Bar.new
+    g.title = "#{@quiz.name}: Overall Performance"
+    scores = {  
+      "0-50" => 0,  
+      "50-60" => 0,  
+      "60-70" => 0,  
+      "70-80" => 0,  
+      "80-90" => 0,  
+      "90-100" => 0,
+      "100" => 0
+    }
+    for r in @results
+      score = (r.points.to_f / @quiz.total.to_f)
+      case score
+      when (0.0 <= score < 0.5)
+        scores["0-50"] += 1
+      when (0.5 <= score < 0.6)
+        scores["50-60"] += 1
+      when (0.6 <= score < 0.7)
+        scores["60-70"] += 1
+      when (0.7 <= score < 0.8)
+        scores["70-80"] += 1
+      when (0.8 <= score < 0.9)
+        scores["80-90"] += 1
+      when (0.9 <= score < 1.0)
+        scores["90-100"] += 1
+      when score == 1.0
+        scores["100"] += 1
+      end
+    end
+    scores.each {|key, value| g.data(key.to_s, value)}  
+    render :data => g.draw
+  end
   def edit_settings
     @quiz = @user.quizzes.find_by_ref(params[:id])
   end
