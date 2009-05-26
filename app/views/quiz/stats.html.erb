@@ -26,14 +26,15 @@
           <a href="/user/logout">Logout</a>
       </div>
       <div id="content">
-  		<img src="/quiz/stats_pie/<%= @quiz.ref %>" height="300" width="400"/>
+	<h2>Graph Analysis</h2>
+  		<img src="/quiz/stats_pie/<%= @quiz.ref %>" height="450" width="600"/>
       <br>
-
+	<h2>Item Analysis</h2>
       <table id="quiztable" cellspacing="0">
         <tr>
           <th scope="col">#</th>
           <th scope="col">Type</th>
-          <th scope="col">Portion Correct</th>
+          <th scope="col">Fraction Correct</th>
           <th scope="col">%</th>
         </tr>
 		<% n = 1 %>
@@ -42,7 +43,7 @@
         <td class="desc"><%= n %></td> <% n += 1 %>
         <td class="lineitem"><%= r.type2.to_s.gsub("4", "Multiple Choice").gsub("5", "Exact Answer") %></td>
 		<td class="lineitem"><%= @correct["q#{r.order_index}"] %> / <%= @count %></td>
-		<td></td>
+		<td class="lineitem"><%= ((@correct["q#{r.order_index}"].to_f / @count.to_f) * 100).round %></td>
         </tr>      
      	<% end %>
       </table>
