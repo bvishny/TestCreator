@@ -395,7 +395,8 @@ class QuizController < ApplicationController
       "70-80" => 0,  
       "80-90" => 0,  
       "90-100" => 0,
-      "100" => 0
+      "100" => 0,
+      "100+" => 0
     }
     for r in @results
       score = (r.score.to_f / @quiz.total.to_f)
@@ -413,6 +414,8 @@ class QuizController < ApplicationController
         scores["90-100"] += 1
       elsif score == 1.0
         scores["100"] += 1
+      elsif (score > 1.0)
+        scores["100+"] += 1
       end
     end
     g.theme_37signals()
