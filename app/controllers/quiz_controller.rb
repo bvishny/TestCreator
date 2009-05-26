@@ -417,7 +417,8 @@ class QuizController < ApplicationController
       end
     end
     scores.each {|key, value| g.data(key.to_s, value)}  
-    send_data g.to_blob, :type => "image/png", :disposition => 'inline'
+    #send_data g.to_blob, :type => "image/png", :disposition => 'inline'
+    render :text => scores.inspect.to_s
   end
   def edit_settings
     @quiz = @user.quizzes.find_by_ref(params[:id])
