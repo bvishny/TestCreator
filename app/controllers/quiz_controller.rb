@@ -398,7 +398,7 @@ class QuizController < ApplicationController
       "100" => 0
     }
     for r in @results
-      score = (r.points.to_f / @quiz.total.to_f)
+      score = (r.score.to_f / @quiz.total.to_f)
       case score
       when (0.0 <= score < 0.5)
         scores["0-50"] += 1
