@@ -393,24 +393,23 @@ class QuizController < ApplicationController
       "50-60" => 0,  
       "60-70" => 0,  
       "70-80" => 0,  
-      "80-90" => 5,  
+      "80-90" => 0,  
       "90-100" => 0,
       "100" => 0
     }
     for r in @results
       score = (r.score.to_f / @quiz.total.to_f)
-      case score
-      when (0.0 <= score or score < 0.5)
+      if (score >= 0.5 and score < 0.5)
         scores["0-50"] += 1
-      when (0.5 <= score or score < 0.6)
+      elsif (score >= 0.5 and score < 0.6)
         scores["50-60"] += 1
-      when (0.6 <= score or score < 0.7)
+      elsif (score >= 0.6 and score < 0.7)
         scores["60-70"] += 1
-      when (0.7 <= score or score < 0.8)
+      when (score >= 0.7 and score < 0.8)
         scores["70-80"] += 1
-      when (0.8 <= score or score < 0.9)
+      when (score >= 0.8 and score < 0.9)
         scores["80-90"] += 1
-      when (0.9 <= score or score < 1.0)
+      when (score >= 0.9 and score < 1.0)
         scores["90-100"] += 1
       when score == 1.0
         scores["100"] += 1
