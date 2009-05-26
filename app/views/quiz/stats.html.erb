@@ -43,7 +43,8 @@
         <td class="lineitem"><%= r.type2.to_s.gsub("4", "Multiple Choice").gsub("5", "Exact Answer") %></td>
 		<td class="lineitem"><%= @correct["q#{r.order_index}"] %> / <%= @count %></td>
 		<td></td>
-        </tr>           
+        </tr>      
+     	<% end %>
       </table>
       </div>
       <%= token_tag %>

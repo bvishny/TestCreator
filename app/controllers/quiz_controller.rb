@@ -439,7 +439,8 @@ class QuizController < ApplicationController
       @count += 1
       for a in t.answers
         if a.correct == 1
-          @correct["q#{a.item.order_index}"] += 1
+          item = Item.find(a.item_id)
+          @correct["q#{item.order_index}"] += 1
         end
       end
     end
