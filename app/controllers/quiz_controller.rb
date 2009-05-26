@@ -386,7 +386,7 @@ class QuizController < ApplicationController
     @quiz = @user.quizzes.find_by_ref(params[:id])
     @results = @quiz.takens.find(:all, :conditions => ["status = 1"])
     require 'gruff'
-    g = Gruff::Bar.new
+    g = Gruff::Pie.new
     g.title = "#{@quiz.name}: Overall Performance"
     scores = {  
       "0-50" => 0,  
