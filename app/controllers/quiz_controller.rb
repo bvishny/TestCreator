@@ -418,7 +418,21 @@ class QuizController < ApplicationController
         scores["100+"] += 1
       end
     end
-    g.theme_37signals()
+    @green = '#339933'
+        @purple = '#cc99cc'
+        @blue = '#336699'
+        @yellow = '#FFF804'
+        @red = '#ff0000'
+        @orange = '#cf5910'
+        @black = 'black'
+        @other = "#0099FF"
+        @colors = [@yellow, @blue, @green, @red, @purple, @orange, @black, @other]
+    g.theme = {
+            :colors => @colors,
+            :marker_color => 'black',
+            :font_color => 'black',
+            :background_colors => ['#d1edf5', 'white']
+          }
     scores.each {|key, value| g.data(key.to_s, value)}  
     send_data g.to_blob, :type => "image/png", :disposition => 'inline'
     #render :text => scores.inspect.to_s
