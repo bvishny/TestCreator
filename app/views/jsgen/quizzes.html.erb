@@ -3,4 +3,5 @@ var auth = names[0].value;
 
 <% for q in @user.quizzes %>
 new Ajax.InPlaceEditor('name_<%= q.ref %>', '/quiz/edit_name/<%= q.ref %>?authenticity_token=' + auth, {cols:<%= q.name.length %>, cancelControl:'false', highlightcolor:'#C9E2FB', submitOnBlur:'true'});
+new Ajax.InPlaceEditor('total_<%= q.ref %>', '/quiz/edit_total/<%= q.ref %>?authenticity_token=' + auth, {cols:2, cancelControl:'false', highlightcolor:'#C9E2FB', submitOnBlur:'true'});
 <% end %>

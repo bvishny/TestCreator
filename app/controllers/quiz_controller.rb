@@ -303,6 +303,12 @@ class QuizController < ApplicationController
     @item.save!
     render :text => @item["c" + params[:number]].to_s
   end
+  def edit_total
+    @quiz = @user.quizzes.find_by_ref(params[:id])
+    @quiz.total = params[:value].to_i
+    @quiz.save!
+    render :text => @quiz.total
+  end
   def edit_explanation
     @item = @user.quizzes.find_by_ref(params[:quiz_ref]).items.find_by_ref(params[:id])
     @item.explanation = params[:value]
@@ -400,7 +406,7 @@ class QuizController < ApplicationController
     }
     for r in @results
       score = (r.score.to_f / @quiz.total.to_f)
-      if (score >= 0.5 and score < 0.5)
+      if (score >= 0.0 and score < 0.5)
         scores["0-50"] += 1
       elsif (score >= 0.5 and score < 0.6)
         scores["50-60"] += 1
