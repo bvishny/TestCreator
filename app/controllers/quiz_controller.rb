@@ -1,6 +1,5 @@
 class QuizController < ApplicationController
   before_filter :auth, :except => ["take"]
-  after_filter :check_for_iframe
   def take 
     if not session[:user_id]
       flash[:notice] = "Please register in order to take this quiz. We promise it's quick."
@@ -484,16 +483,6 @@ class QuizController < ApplicationController
        }
        type = item.url.split('.')[-1]
     	send_data res.body, :filename => "quiz_item_#{rand(1000)}.#{type}", :type => "image/#{type.gsub('jpg', 'jpeg')}", :disposition => 'inline'
-    end
-  end
-  private
-  def check_for_iframe
-    if params[:iframe] and ! params[:action].include? "iframe"
-     # begin
-        render :action => "#{params[:action]}_iframe"
-     # rescue 
-       # render :text => "Your request cannot be serviced using an iframe."
-     # end
     end
   end
 end
