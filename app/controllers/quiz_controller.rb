@@ -1,6 +1,6 @@
 class QuizController < ApplicationController
   before_filter :auth, :except => ["take"]
-  before_filter :check_for_iframe
+  after_filter :check_for_iframe
   def take 
     if not session[:user_id]
       flash[:notice] = "Please register in order to take this quiz. We promise it's quick."
