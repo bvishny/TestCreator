@@ -2,9 +2,9 @@ body {
 	margin: 0px;
 }
 #content {
-	z-index: 2;
 	position:absolute;
 	top: 100px;
+	left: 0px;
 }
 #top {
 	background-image: url(/images/top_iframe_bg.jpg);
@@ -15,8 +15,6 @@ body {
 	border-bottom: 1px solid #192532;
 	border-right: 1px solid #192532;
 	position:fixed;
-	margin-bottom: 5px;
-	z-index: 4;
 	background-repeat: no-repeat;
 }
 #top h1 {
