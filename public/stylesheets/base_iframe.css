@@ -1,6 +1,9 @@
 body {
 	margin: 0px;
 }
+#content {
+  margin-top: 10px;
+}
 #top {
 	background-image: url(/images/top_iframe_bg.jpg);
 	color:#FFFFFF;
@@ -9,7 +12,7 @@ body {
 	padding-top: 3px;
 	border-bottom: 1px solid #192532;
 	border-right: 1px solid #192532;
-	position:static;
+	position:fixed;
 	margin-bottom: 5px;
 }
 #top h1 {
