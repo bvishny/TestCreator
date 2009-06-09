@@ -3,6 +3,7 @@ body {
 }
 #content {
 	padding-top:25px;
+	z-index: 4;
 }
 #top {
 	background-image: url(/images/top_iframe_bg.jpg);
@@ -15,6 +16,8 @@ body {
 	position:fixed;
 	margin-bottom: 5px;
 	height: 100px;
+	z-index: 2;
+	background-repeat: no-repeat;
 }
 #top h1 {
 	color: #FFFFFF;
