@@ -3,7 +3,7 @@
 <html>
   <head>
     <title>WebQuiz: <%= h @quiz.name %></title>
-    <link rel="stylesheet" type="text/css" href="/stylesheets/base.css<% if params[:iframe] -%>_iframe<% end -%>?<%= rand(10000) %>"/>
+    <link rel="stylesheet" type="text/css" href="/stylesheets/base<% if params[:iframe] -%>_iframe<% end -%>.css?<%= rand(10000) %>"/>
     <script type="text/javascript" src="http://208.112.81.88/javascripts/prototype-min.js"></script>
   </head>
   <body>
