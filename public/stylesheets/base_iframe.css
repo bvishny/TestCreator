@@ -2,7 +2,7 @@ body {
 	margin: 0px;
 }
 #content {
-  margin-top: 10px;
+	padding-top:10px;
 }
 #top {
 	background-image: url(/images/top_iframe_bg.jpg);
@@ -20,6 +20,7 @@ body {
 	font-family:Helvetica;
     font-weight:300;
   	margin-bottom:2px;
+  	margin-top: 5px;
   	font-size: 24px;
 }
 #top h3 {
