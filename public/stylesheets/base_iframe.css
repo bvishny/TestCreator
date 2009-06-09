@@ -1,9 +1,12 @@
 body {
-
+	margin: 0px;
 }
 #top {
 	background-image: url(/images/top_iframe_bg.jpg);
 	color:#FFFFFF;
+	width: 400px;
+	padding: 3px;
+	border-bottom: 1px solid #192532;
 }
 #top h1 {
 	color: #FFFFFF;
@@ -143,7 +146,7 @@ form {
   font-size:14px;
 }
 #content {
-  width:580px;
+  width:400px;
   font-family:Helvetica, Arial;
   background-color:#FFFFFF;
   padding:10px;
@@ -162,7 +165,7 @@ a:visited {
   background-color:#182336;
   color:#FFFFFF;
   padding:5px;
-  width:590px;
+  width:400px;
 }
 #quizheader {
   margin-left:50px;
