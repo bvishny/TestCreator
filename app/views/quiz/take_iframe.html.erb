@@ -1,0 +1,56 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head>
+    <title>WebQuiz: <%= h @quiz.name %></title>
+    <link rel="stylesheet" type="text/css" href="/stylesheets/base.css?<%= rand(10000) %>"/>
+    <script type="text/javascript" src="http://208.112.81.88/javascripts/prototype-min.js"></script>
+  </head>
+  <body>
+  
+        <% if @quiz.total == 0 %>
+            <% total = Item.sum('points', :conditions => ["quiz_id = ?", @quiz.id ]) %>
+          <% else %>
+            <% total = @quiz.total %>
+          <% end %>
+        <h3><%= total %> points</h3>
+        <form id="authenticity" name="authenticity">
+   <input type="hidden" id="quiz_ref" value="<%= @quiz.ref %>"/>
+   <%= token_tag %>
+</form>
+<% count = 0 %>
+        <div id="quizitems">
+          <% for item in @items %>
+            <div id="item_<%= item.id %>" class="item">
+          <% if item.type2 == 1 %>
+            <h2 id="h2_<%= item.ref %>"><%= h item.text %></h2>
+        <% elsif item.type2 == 2 %>
+            <span id="txt_<%= item.ref %>"><%= h item.text %></span>
+          <% elsif item.type2 == 3 %>
+            <img style="width:<%= h item.c1 %>px;height:<%= h item.c2 %>px" id="img<%= item.id %>" src="/quiz/image_proxy/<%= h item.ref %>" width="<%= h item.c1 %>" height="<%= h item.c2 %>"/>
+          <% elsif item.type2 == 4 %>
+<% count += 1 %>
+    <%= count %>. <span id="txt_<%= item.ref %>" style="font-weight:600"><%= h item.text %></span><br>
+      <% if item.c1 =~ /[a-zA-Z0-9]/ or item.c1.length > 0 %><input type="radio" onchange="SubmitAnswer('<%= item.ref %>', this.value);" name="group_<%= item.ref %>" value="A"> <span id="c1_<%= item.ref %>"><%= h item.c1 %></span><br><% end %>
+       <% if item.c2 =~ /[a-zA-Z0-9]/ or item.c2.length > 0 %><input type="radio" onchange="SubmitAnswer('<%= item.ref %>', this.value);" name="group_<%= item.ref %>" value="B"> <span id="c2_<%= item.ref %>"><%= h item.c2 %></span><br><% end %>
+      <% if item.c3 =~ /[a-zA-Z0-9]/ or item.c3.length > 0 %><input type="radio" onchange="SubmitAnswer('<%= item.ref %>', this.value);" name="group_<%= item.ref %>" value="C"> <span id="c3_<%= item.ref %>"><%= h item.c3 %></span><br><% end %>
+      <% if item.c4 =~ /[a-zA-Z0-9]/ or item.c4.length > 0 %> <input type="radio" onchange="SubmitAnswer('<%= item.ref %>', this.value);" name="group_<%= item.ref %>" value="D"> <span id="c4_<%= item.ref %>"><%= h item.c4 %></span><br><% end %>
+       <% if item.c5 =~ /[a-zA-Z0-9]/ or item.c5.length > 0 %><input type="radio"  onchange="SubmitAnswer('<%= item.ref %>', this.value);" name="group_<%= item.ref %>" value="E"> <span id="c5_<%= item.ref %>"><%= h item.c5 %></span><br><% end %>
+  <% elsif item.type2 == 5 %>
+     <% count += 1 %>
+      <%= count %>. <span style="font-weight:600" id="txt_<%= item.ref %>"><%= h item.text %></span><br>
+      <input type="text" id="exact_answer_<%= item.ref %>" onchange="SubmitAnswer('<%= item.ref %>', this.value);" name="exact_answer" /> <span id="c1_<%= item.ref %>"><%= h item.c1 %></span>
+  <% end %>
+</div>
+          <% end %>
+          <div style="text-align:center;margin-top:10px;">
+            <form id="tokens" name="tokens" action="/quiz/submit" method="post">
+              <%= token_tag %>
+              <input type="hidden" name="quiz_ref" value="<%= @quiz.ref %>"/>
+              <button type="submit" id="btnSubmit" style="color:#FFFFFF;background-color:#173A7A;border:1px outset #173A7A;"><img src="/images/icons/accept.png"/> Submit Quiz</button>&nbsp;&nbsp;&nbsp;
+              <button type="button" onclick="document.location.href='/user/take_quizzes'"><img src="/images/icons/disk.png"/> Save For Later</button>
+            </form>
+          </div>
+    <script type="text/javascript" src="/javascripts/quiz.js?<%= rand(1000000) %>"></script>
+  </body>
+</html>
