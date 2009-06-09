@@ -489,11 +489,11 @@ class QuizController < ApplicationController
   private
   def check_for_iframe
     if params[:iframe] 
-      begin
+     # begin
         render :action => "#{params[:action]}_iframe"
-      rescue 
-        render :text => "Your request cannot be serviced using an iframe."
-      end
+     # rescue 
+       # render :text => "Your request cannot be serviced using an iframe."
+     # end
     end
   end
 end
