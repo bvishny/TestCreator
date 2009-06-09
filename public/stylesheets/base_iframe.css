@@ -4,6 +4,8 @@ body {
 #content {
 	padding-top:25px;
 	z-index: 4;
+	position:absolute;
+	top: 100px;
 }
 #top {
 	background-image: url(/images/top_iframe_bg.jpg);
@@ -15,7 +17,6 @@ body {
 	border-right: 1px solid #192532;
 	position:fixed;
 	margin-bottom: 5px;
-	height: 100px;
 	z-index: 2;
 	background-repeat: no-repeat;
 }
