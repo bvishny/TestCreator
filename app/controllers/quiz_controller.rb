@@ -488,7 +488,7 @@ class QuizController < ApplicationController
   end
   private
   def check_for_iframe
-    if params[:iframe] 
+    if params[:iframe] and ! params[:action].include? "iframe"
      # begin
         render :action => "#{params[:action]}_iframe"
      # rescue 
