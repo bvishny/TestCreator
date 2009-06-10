@@ -9,7 +9,7 @@ body {
 	padding-top: 3px;
 	border-bottom: 1px solid #192532;
 	border-right: 1px solid #192532;
-	background-repeat: no-repeat;
+	background-repeat: repeat-x;
 }
 #top h1 {
 	color: #FFFFFF;
