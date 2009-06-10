@@ -10,10 +10,6 @@ body {
 	border-bottom: 1px solid #192532;
 	border-right: 1px solid #192532;
 	background-repeat: repeat-x;
-	position: fixed;
-}
-#content {
-	margin-top:100px;
 }
 #top h1 {
 	color: #FFFFFF;
