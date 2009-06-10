@@ -13,8 +13,7 @@ body {
 	position: fixed;
 }
 #content {
-	position: absolute;
-	top: 100px;
+	margin-top: 50px;
 }
 #top h1 {
 	color: #FFFFFF;
