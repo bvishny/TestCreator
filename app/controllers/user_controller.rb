@@ -1,5 +1,5 @@
 class UserController < ApplicationController
-  before_filter :auth, :except => ["login", "register", "new"]
+  before_filter :auth, :except => ["login", "register", "new", "preprocess"]
   def new
     if request.post?
       @user = User.new(params[:user])
