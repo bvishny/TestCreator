@@ -12,6 +12,10 @@ body {
 	background-repeat: repeat-x;
 	position: fixed;
 }
+#content {
+	position: absolute;
+	top: 100px;
+}
 #top h1 {
 	color: #FFFFFF;
 	font-family:Helvetica;
