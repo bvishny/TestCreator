@@ -60,7 +60,7 @@
 </div>
           <% end %>
           <div style="text-align:center;margin-top:10px;">
-            <form id="tokens" name="tokens" action="/quiz/submit" method="post">
+            <form id="tokens" name="tokens" action="/quiz/submit<% if params[:iframe] -%>?iframe=true<% end -%>" method="post">
               <%= token_tag %>
               <input type="hidden" name="quiz_ref" value="<%= @quiz.ref %>"/>
               <button type="submit" id="btnSubmit" style="color:#FFFFFF;background-color:#173A7A;border:1px outset #173A7A;"><img src="/images/icons/accept.png"/> Submit Quiz</button>&nbsp;&nbsp;&nbsp;
