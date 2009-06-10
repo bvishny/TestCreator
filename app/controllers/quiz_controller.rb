@@ -2,9 +2,10 @@ class QuizController < ApplicationController
   before_filter :auth, :except => ["take"]
   def take 
     if not session[:user_id]
-      flash[:notice] = "Please register in order to take this quiz. We promise it's quick."
       session[:intended_action] = request.request_uri
-      redirect_to :controller => :user, :action => :register
+      @quiz = Quiz.find_by_ref(params[:id])
+      flash[:quiz_name]  = @quiz.name
+      redirect_to :controller => :user, :action => :preprocess
     else
       @quiz = Quiz.find_by_ref(params[:id])
       @user = User.find(session[:user_id])

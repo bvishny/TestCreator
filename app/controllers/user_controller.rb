@@ -55,7 +55,10 @@ class UserController < ApplicationController
     flash[:notice] = "You have been logged out."
     redirect_to :controller => :user, :action => :login
   end
-  
+  def preprocess
+    @username = "tmp#{newpass(5).downcase}"
+    @password = "pwd#{newpass(16)}"
+  end
   def update
     if request.post?
       @user.password = params[:user][:password]

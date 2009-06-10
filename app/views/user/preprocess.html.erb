@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head>
+    <title>WebQuiz: Begin Quiz</title>
+    <link rel="stylesheet" type="text/css" href="/stylesheets/base.css?<%= rand(10000) %>"/>
+    <script type="text/javascript" src="http://208.112.81.88/javascripts/prototype-min.js"></script>
+  </head>
+  <body>
+    <div id="container">
+      <div id="top">
+        <h1><%= flash[:quiz_name] %></h1>
+        <h3>Enter your name</h3>
+        <div id="logo2">
+          <img src="/images/logo.gif" width="64" height="64"/>
+        </div>
+      </div>
+      <div id="menu">
+          <a href="/">Home</a>
+          <a href="/user/login">Login</a>
+          <a href="/user/register">Register</a>
+          <a href="/quizzes" style="color:#173A7A;">Take Quizzes</a>
+      </div>
+      <div id="content">
+        <div id="update">
+        </div>
+        <form action="/user/new" method="post" onsubmit="new Ajax.Updater('update', '/user/new', {asynchronous:true, evalScripts:true, parameters:Form.serialize(this)}); return false;" name="frmRegister">
+         <%= token_tag %>
+          <p style="font-size:18px">
+            Name:<br>
+            <input style="font-size:18px;" name="user[name]" class="field" size="35" type="text"/>
+          </p>
+          <input name="user[username]" class="field" size="35" type="hidden" value="<%= @username %>"/>
+          <input name="user[password]" class="field" size="35" type="hidden" value="<%= @password %>"/>
+          <input name="user[password_confirmation]" size="35" class="field" type="hidden" value="<%= @password %>" />
+          <button name="btnSubmit" style="font-size:18px;" type="submit">Begin Quiz</button>
+          </form>
+      </div>
+      <div id="bottom">
+      
+      </div>
+    </div>
+  </body>
+</html>
