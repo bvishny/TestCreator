@@ -7,6 +7,6 @@
         </ul>
       </div>
     <% else %>
-      <script type="text/javascript">document.location.href='/user/home';
+      <script type="text/javascript">document.location.href=<% unless session[:intended_action] -%>'/user/home'<% else -%>'<%= session[:intended_action] %>'<% session[:intended_action] = nil -%><% end -%>;
       </script>
     <% end %>
