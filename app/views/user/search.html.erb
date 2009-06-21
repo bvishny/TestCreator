@@ -34,7 +34,7 @@
     </tr>
     <% for q in @quizzes %>
      <tr id="row_<%= q.ref %>" style="background-color:<%= cycle('#E5EBF0', '#FFFFFF') %>;">
-    <td class="desc"><%= h q.name.gsub(params[:q], "<strong>#{params[:q]}</strong>") %></td>
+    <td class="desc"><%= (h(q.name)).gsub(params[:q], "<strong>#{params[:q]}</strong>") %></td>
     <td class="lineitem"><%= h q.user.name %></td>
       <% if q.total == 0 %>
             <% totalquiz = Item.sum('points', :conditions => ["quiz_id = ?", q.id ]) %>
