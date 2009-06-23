@@ -193,6 +193,7 @@ form {
   font-family:Helvetica, Arial;
   background-color:#FFFFFF;
   padding:10px;
+  float:left;
 }
 a {
   color:#173A7A;
