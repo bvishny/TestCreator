@@ -14,10 +14,16 @@ class ApplicationController < ActionController::Base
   
   private
   def auth
-    unless session[:user_id]
+    if not session[:user_id] and not params[:fly_login]
       session[:intended_action] = request.request_uri
       flash[:notice] = "You must login to view this page"
       redirect_to :controller => :user, :action => :login
+    elsif params[:fly_login]
+      @user = User.find(:first, :conditions => ["username = ?", params[:fly_login]])
+      if @user.blank? || @user.password != params[:fly_password]
+        flash[:notice] = "You must login to view this page"
+        redirect_to :controller => :user, :action => :login
+      end
     else
       @user = User.find(session[:user_id])
     end

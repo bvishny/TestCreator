@@ -29,14 +29,22 @@ class UserController < ApplicationController
       if @user.blank? || @user.password != password
         flash[:notice] = "Invalid credentials provided. Please try again."
       else
-        @user.ip = request.remote_ip
-        @user.last_login = Time.now
-        @user.useragent = request.env['HTTP_USER_AGENT']
-        @user.save!
-        intended_action = session[:intended_action] ||= "/user/home"
-        reset_session
-        session[:user_id] = @user.id
-        redirect_to intended_action
+        unless @user.role == -1
+          @user.ip = request.remote_ip
+          @user.last_login = Time.now
+          @user.useragent = request.env['HTTP_USER_AGENT']
+          @user.save!
+          if @user.role == 5
+            intended_action = session[:intended_action] ||= "/admin/environment"
+          else
+            intended_action = session[:intended_action] ||= "/user/home"
+          end
+          reset_session
+          session[:user_id] = @user.id
+          redirect_to intended_action 
+        else
+          flash[:notice] = "( ! ) This account has been suspended."
+        end
       end
     end
   end

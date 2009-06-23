@@ -116,6 +116,22 @@ tr input:focus {
   text-decoration:none;
   font-family:Arial;
 }
+a.selectbutton {
+	background-color:#F7F7F7;
+	border-bottom:1px solid #CCCCCC;
+	border-top:1px solid #CCCCCC;
+	color:#666666;
+	display:block;
+	float:left;
+	margin-bottom:5px;
+	margin-right:10px;
+	padding:5px;
+	width:200px;
+}
+a.selectbutton:hover {
+	background-color:#F0A317;
+	border:1px solid #78500A;
+}
 #logo2 {
   position:relative;
   left:500px;
@@ -125,6 +141,10 @@ a.selectedmenu {
   border-right:1px solid #173A7A;
   border-left:1px solid #173A7A;
   color:#173A7A;
+}
+a.selectedmenu h4 {
+  margin-bottom:5px;
+  font-size:18px;
 }
 #menu a:hover {
   padding-top:10px;
