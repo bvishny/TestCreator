@@ -189,14 +189,14 @@ button {
   border:1px outset #B7B7B7;
   color:#333333;
   font-size:16px;
-  padding:3px;
+  padding:5px;
 }
 button:active {
   background-color:#CCCCCC;
   border:1px outset #666666;
   color:#00000;
   font-size:16px;
-  padding:3px;
+  padding:5px;
 }
 form {
   font-family:Helvetica;
