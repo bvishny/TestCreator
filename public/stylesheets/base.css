@@ -171,7 +171,7 @@ input.field:focus {
   border:1px solid #173A7A;
   background-color:#FFFFFF;
 }
-button {
+/*button {
   background-color:#F7F7F7;
   border:1px outset #B7B7B7;
   color:#333333;
@@ -184,6 +184,34 @@ button:active {
   color:#00000;
   font-size:18px;
   padding:3px;
+}
+*/
+button {
+	background-color:#F5F5F5;
+	border-color:#EEEEEE rgb(222, 222, 222) rgb(222, 222, 222) rgb(238, 238, 238);
+	border-style:solid;
+	border-width:1px;
+	color:#565656;
+	cursor:pointer;
+	display:inline;
+	float:left;
+	font-family:"Lucida Grande",Tahoma,Arial,Verdana,sans-serif;
+	font-size:10pt;
+	font-weight:bold;
+	line-height:130%;
+	margin:0.7em 0.5em 0.7em 0pt;
+	padding:5px 10px 5px 7px;
+	text-decoration:none;
+}
+button:hover {
+	background-color:#DFF4FF;
+	border-color:#D2F1FF rgb(194, 225, 239) rgb(194, 225, 239) rgb(210, 241, 255);
+	color:#336699;
+}
+button:active {
+	background-color:#6299C5;
+	color:#FFF;
+	border:1px solid #477090;
 }
 form {
   font-family:Helvetica;
