@@ -4,6 +4,7 @@
   <head>
     <title>WebQuiz: Select Environment</title>
     <link rel="stylesheet" type="text/css" href="/stylesheets/base.css?<%= rand(10000) %>"/>
+	    <link rel="stylesheet" type="text/css" href="/stylesheets/reset.css?<%= rand(10000) %>"/>
     <script type="text/javascript" src="http://208.112.81.88/javascripts/prototype-min.js"></script>
   </head>
   <body>
@@ -24,11 +25,9 @@
           <a href="/user/logout">Logout</a>
       </div>
       <div id="content">
-		<div style="float:left;">
-			<center>
+		<div style="float:left;margin-left:100px;">
       			<a href="/user/home" class="selectbutton"><h4>Regular WebQuiz Interface</h4><p>Take and make quizzes. </p></a>
         		<a href="/admin/index" class="selectbutton"><h4>Admin Interface</h4><p>Manage users and site settings.</p></a>
-			</center>
 		</div>
       </div>
       <div id="bottom">
