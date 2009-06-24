@@ -201,7 +201,7 @@ button:active {
 */
 button {
 	background-color:#F5F5F5;
-	border-color:#EEEEEE rgb(222, 222, 222) rgb(222, 222, 222) rgb(238, 238, 238);
+	border-color:#EEEEEE rgb(224, 224, 224) rgb(224, 224, 224) rgb(240, 240, 240);
 	border-style:solid;
 	border-width:1px;
 	color:#565656;
@@ -215,11 +215,6 @@ button {
 	margin:0.7em 0.5em 0.7em 0pt;
 	padding:5px 10px 5px 7px;
 	text-decoration:none;
-}
-button:hover {
-	background-color:#DFF4FF;
-	border-color:#D2F1FF rgb(194, 225, 239) rgb(194, 225, 239) rgb(210, 241, 255);
-	color:#336699;
 }
 button:active {
 	background-color:#6299C5;
