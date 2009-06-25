@@ -30,11 +30,12 @@
 			<p><button style="font-size:16px;"><img src="/images/cog_edit.png"/> Advanced Settings</button></p>
 		</div>
 		<div style="float:left;padding-left:10px;">
-      		<h2>Database Search</h2>
+      		<h2>Database Search*</h2>
 			<form action="/admin/search" method="post">
 	          <%= token_tag %>
 	          <input name="q" class="field" type="text"/> <button type="submit">Go!</button>
 	        </form>
+	   		<p>A very intensive search will ensue. Every WebQuiz-related record in the database will be searched, beginning with users.</p>
 		</div>
       </div>
       <div id="bottom">
