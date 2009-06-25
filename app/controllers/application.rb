@@ -26,6 +26,10 @@ class ApplicationController < ActionController::Base
       end
     else
       @user = User.find(session[:user_id])
+      if @user.role == -1
+        flash[:notice] = "( ! ) This account has been suspended."
+        redirect_to :controller => :login
+      end
     end
   end 
   
