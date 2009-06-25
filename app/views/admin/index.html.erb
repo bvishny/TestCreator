@@ -27,10 +27,14 @@
 		<div style="float:left;width:250px;border-right:1px solid #333333;">
       		<h2>Management</h2>
 			<p><button style="font-size:16px;"><img src="/images/user_edit.png"/> User Management</button></p>
-			<p><button style="font-size:16px;"><img src="/images/cog_edit.png"/>Advanced Settings</button></p>
+			<p><button style="font-size:16px;"><img src="/images/cog_edit.png"/> Advanced Settings</button></p>
 		</div>
 		<div style="float:left;padding-left:10px;">
       		<h2>Database Search</h2>
+			<form action="/admin/search" method="post">
+	          <%= token_tag %>
+	          <input name="q" class="field" type="text"/> <button type="submit">Go!</button>
+	        </form>
 		</div>
       </div>
       <div id="bottom">
