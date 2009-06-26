@@ -39,17 +39,12 @@
       }
       
       #content {
-        float: left;
+		margin:auto;
         background-color: white;
         border: 3px solid #173A7A;
         border-top: none;
         padding: 25px;
         width: 500px;
-      }
-      
-      #sidebar {
-        float: right;
-        width: 175px;
       }
 
       #footer {
@@ -169,40 +164,18 @@
         </div>
 
         <div id="getting-started">
-          <h1>Getting started</h1>
-          <h2>Here&rsquo;s how to get rolling:</h2>
-          
-          <div id="instructions">
-            <h2>Use the online editor</h2>
-            <p><a id="edit_link" href="#">Edit your app</a> online</h2>, or <a id="import_link" href="#">import a tarball</a>.</p>
-          </div>
-         
-          <div id="instructions">
-            <h2>Work locally and deploy to Heroku</h2>
-            <pre>gem install heroku
-heroku clone <span id="app_name1">yourapp</span>
-cd <span id="app_name2">yourapp</span>
-[..local edits..]
-git add .
-git commit -m "local changes"
-git push</pre>
-          </div>
+         <h3>Features:</h3>
+			<ul>
+				<li>Slick Ajax Quiz Editor</li>
+				<li>Five Types of Quiz Objects</li>
+				<li>Statistical Analysis</li>
+				<li>..And much more!</li>
+			</ul>
         </div>
       </div>
       
       <div id="footer">&nbsp;</div>
     </div>
-
-<script type="text/javascript">
-  var parts = location.hostname.split('.')
-  var app_name = parts[0]
-  var domain = parts.slice(1).join('.')
-
-  document.getElementById('app_name1').innerHTML = app_name
-  document.getElementById('app_name2').innerHTML = app_name
-  document.getElementById('edit_link').href = 'http://edit.' + location.hostname
-  document.getElementById('import_link').href = 'http://' + domain + '/myapps/' + app_name + '/import_export'
-</script>
 
 </body>
 
