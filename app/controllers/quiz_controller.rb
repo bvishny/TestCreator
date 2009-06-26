@@ -125,6 +125,7 @@ class QuizController < ApplicationController
   def check_answer
     @quiz = Quiz.find(:first, :conditions => ["ref = ? and (password_protect = 0  or password_protect = 1)", params[:quiz_ref]])
     @taken = @user.takens.find(:first, :conditions => ["quiz_id = ? and status = 2", @quiz.id])
+    @taken.updated_at = Time.now
     @item = @quiz.items.find_by_ref(params[:ref])
     answer_test = @taken.answers.find(:first, :conditions => ["item_id = ?", @item.id])
     gsubanswer = params[:answer].gsub("$$$$", " ")

@@ -44,6 +44,10 @@
           Confirm Password:<br>
           <input name="user[password_confirmation]" size="35" class="field" value="<%= @user.password %>" type="password"/>
           </p>
+		  <p>
+		  Time Zone:<br>
+		  <%= f.time_zone_select :time_zone, TimeZone.us_zones %>
+		  </p>
           <button name="btnSubmit" type="submit">Submit</button>
           </form>
       </div>

@@ -20,6 +20,7 @@ class ApplicationController < ActionController::Base
       redirect_to :controller => :user, :action => :login
     else
       @user = User.find(session[:user_id])
+      #Time.zone = @user.time_zone
       if @user.role == -1
         flash[:notice] = "( ! ) This account has been suspended."
         redirect_to :controller => :user, :action => :login
