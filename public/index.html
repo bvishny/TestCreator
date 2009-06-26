@@ -64,7 +64,7 @@
 
 
       #header {
-        background-image: url("/images/logo.gif");
+        background-image: url("/promo/images/logo.gif");
         background-repeat: no-repeat;
         background-position: top left;
         height: 64px;
@@ -154,81 +154,14 @@
         font-size: 90%;
       }
       
-      
-      #search {
-        margin: 0;
-        padding-top: 10px;
-        padding-bottom: 10px;
-        font-size: 11px;
-      }
-      #search input {
-        font-size: 11px;
-        margin: 2px;
-      }
-      #search-text {width: 170px}
-      
-      
-      #sidebar ul {
-        margin-left: 0;
-        padding-left: 0;
-      }
-      #sidebar ul h3 {
-        margin-top: 25px;
-        font-size: 16px;
-        padding-bottom: 10px;
-        border-bottom: 1px solid #ccc;
-      }
-      #sidebar li {
-        list-style-type: none;
-      }
-      #sidebar ul.links li {
-        margin-bottom: 5px;
-      }
+  
       
     </style>
     <script type="text/javascript" src="javascripts/prototype.js"></script>
     <script type="text/javascript" src="javascripts/effects.js"></script>
-    <script type="text/javascript">
-      window.onload = function() {
-        $('search-text').value = '';
-        $('search').onsubmit = function() {
-          $('search-text').value = 'site:rubyonrails.org ' + $F('search-text');
-        }
-      }
-    </script>
+
   </head>
   <body>
-    <div id="page">
-      <div id="sidebar">
-        <ul id="sidebar-items">
-          <li>
-           
-          </li>
-        
-          <li>
-            <h3>Join the community</h3>
-            <ul class="links">
-              <li><a href="http://www.rubyonrails.org/">Ruby on Rails</a></li>
-              <li><a href="http://weblog.rubyonrails.org/">Official weblog</a></li>
-              <li><a href="http://lists.rubyonrails.org/">Mailing lists</a></li>
-              <li><a href="http://wiki.rubyonrails.org/rails/pages/IRC">IRC channel</a></li>
-              <li><a href="http://wiki.rubyonrails.org/">Wiki</a></li>
-              <li><a href="http://dev.rubyonrails.org/">Bug tracker</a></li>
-            </ul>
-          </li>
-          
-          <li>
-            <h3>Browse the documentation</h3>
-            <ul class="links">
-              <li><a href="http://api.rubyonrails.org/">Rails API</a></li>
-              <li><a href="http://heroku.com/docs/api/">Heroku API</a></li>
-              <li><a href="http://stdlib.rubyonrails.org/">Ruby standard library</a></li>
-              <li><a href="http://corelib.rubyonrails.org/">Ruby core</a></li>
-            </ul>
-          </li>
-        </ul>
-      </div>
-
       <div id="content">
         <div id="header">
           <h1>WebQuiz</h1>
