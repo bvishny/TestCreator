@@ -34,6 +34,7 @@
       <table id="quiztable" cellspacing="0">
         <tr>
           <th scope="col">Participant Name</th>
+		  <th scope="col">Date</th>
           <th scope="col">Score</th>
           <th scope="col">%</th>
           <th scope="col">View Quiz</th>
@@ -46,6 +47,7 @@
           <% else %>
             <% total = @quiz.total %>
           <% end %>
+ 		<td class="lineitem"><%= r.updated_at.strftime("%I:%M%p on %m/%d/%y") %></td>
       <td class="lineitem"><span id="score_<%= r.ref %>"><%= r.score %></span> / <%= total %></td>
       <td class="lineitem" id="percent_<%= r.ref %>"><%= ((r.score.to_f / total.to_f) * 100).round %></td>
       <td class="lineitem"><a href="/quiz/review_mod/<%= r.ref %>">View Quiz</a></td>
