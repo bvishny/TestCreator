@@ -72,6 +72,7 @@ class UserController < ApplicationController
       @user.password = params[:user][:password]
       @user.email = params[:user][:email]
       @user.name = params[:user][:name]
+      @user.time_zone = params[:user][:time_zone]
       if @user.valid?
         @user.save!
         flash[:notice] = "Your account has been updated successfully!"
