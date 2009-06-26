@@ -26,7 +26,7 @@
       <div id="content">
         <% unless flash[:notice] %>
          <h1 style="text-align:center;font-size:24px;">WebQuiz allows you to create and take quizzes. Click the above buttons to navigate!</h1>
-		<h3><%= Time.now %></h3>
+		<!-- <%= Time.now %> -->
        <% else %>
         <h1 style="text-align:center;font-size:24px;"><%= flash[:notice] %></h1>
         <% end %>
