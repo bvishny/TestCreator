@@ -52,7 +52,7 @@
       }
       
 
-      #header, #about, #getting-started {
+      #header, #about, #info {
         padding-left: 75px;
         padding-right: 30px;
       }
@@ -71,83 +71,35 @@
         font-size: 16px;
       }
       
-      
-      #about h3 {
-        margin: 0;
-        margin-bottom: 10px;
-        font-size: 14px;
-      }
-      
-      #about-content {
-        background-color: #ffd;
-        border: 1px solid #fc0;
-        margin-left: -11px;
-      }
-      #about-content table {
-        margin-top: 10px;
-        margin-bottom: 10px;
-        font-size: 11px;
-        border-collapse: collapse;
-      }
-      #about-content td {
-        padding: 10px;
-        padding-top: 3px;
-        padding-bottom: 3px;
-      }
-      #about-content td.name  {color: #555}
-      #about-content td.value {color: #000}
-      
-      #about-content.failure {
-        background-color: #fcc;
-        border: 1px solid #f00;
-      }
-      #about-content.failure p {
-        margin: 0;
-        padding: 10px;
-      }
-      
-      
-      #getting-started {
+  
+      #info {
         border-top: 1px solid #ccc;
         margin-top: 25px;
         padding-top: 15px;
       }
-      #getting-started h1 {
+      #info h1 {
         margin: 0;
         font-size: 20px;
       }
-      #getting-started h2 {
+      #info h2 {
         margin: 0;
         font-size: 14px;
         font-weight: normal;
         color: #333;
         margin-bottom: 25px;
       }
-      #getting-started ol {
+      #info ol {
         margin-left: 0;
         padding-left: 0;
       }
-      #getting-started li {
+      #info li {
         font-size: 18px;
         color: #888;
         margin-bottom: 25px;
       }
-      #instructions h2 {
-        margin: 0;
-        font-weight: bold;
-        font-size: 18px;
-        color: #333;
-      }
-      #instructions p {
-        color: #555;
-        font-size: 13px;
-      }
-      #instructions pre {
-        background: black;
-        color: #ccc;
-        padding: 0.3em 0.5em;
-        font-size: 90%;
-      }
+	ul {
+		list-style-type:square;
+	}
       
   
       
@@ -163,7 +115,7 @@
           <h2>The first RoR quiz maker!</h2>
         </div>
 
-        <div id="getting-started">
+        <div id="info">
          <h3>Features:</h3>
 			<ul>
 				<li>Slick AJAX interface</li>
@@ -173,7 +125,7 @@
 			</ul>
 			<p>WebQuiz will be released for download mid-July! Until then, you can use our live demo site. Click below to grab an account!</p>
 			<form action="/user/register" method="get">
-			<center><button type="submit" style="color:#FFFFFF;font-size:36px;padding:5px;border:1px outset #173A7A;background-image:url(/images/top_iframe_bg.jpg);background-repeat:repeat-x;">Register</button></center>
+			<button type="submit" style="color:#FFFFFF;font-size:26px;padding:10px;border:1px outset #173A7A;background-image:url(/images/top_iframe_bg.jpg);background-repeat:repeat-x;margin-left:100px;">Register</button>
 			</form>
         </div>
       </div>
